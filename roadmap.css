@@ -1,0 +1,1292 @@
+/* ===================================
+   路子图页面样式 - 深度优化版
+   参照PC版本视觉效果，与走势/新闻/好路一致
+   =================================== */
+
+/* 覆盖全局body样式 */
+body.roadmap-page {
+    padding-top: calc(88px + var(--safe-top, 0px)) !important;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom)) !important;
+    background: linear-gradient(180deg, #eef2f9 0%, #f5f7fb 100%);
+    min-height: 100vh;
+}
+
+/* ===================================
+   页面头部 - 与其他页面统一
+   =================================== */
+.page-header {
+    position: fixed;
+    top: calc(24px + var(--safe-top, 0px));
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+}
+
+.back-btn,
+.refresh-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-btn:active,
+.refresh-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.92);
+}
+
+.back-btn svg,
+.refresh-btn svg {
+    width: 22px;
+    height: 22px;
+    color: white;
+}
+
+.refresh-btn:active svg {
+    animation: spin 0.6s ease;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===================================
+   彩种选择按钮
+   =================================== */
+.lottery-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px 7px 10px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.lottery-picker:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.97);
+}
+
+.lottery-picker .picker-icon {
+    font-size: 18px;
+}
+
+.lottery-picker .picker-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.lottery-picker svg {
+    width: 14px;
+    height: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===================================
+   彩种选择弹窗
+   =================================== */
+.lottery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: none;
+}
+
+.lottery-modal.show {
+    display: block;
+}
+
+.modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 70vh;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    animation: slideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.modal-close {
+    width: 34px;
+    height: 34px;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-close:active {
+    background: var(--gray-200);
+}
+
+.modal-close svg {
+    width: 18px;
+    height: 18px;
+    color: var(--gray-500);
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.lottery-group {
+    margin-bottom: 24px;
+}
+
+.lottery-group:last-child {
+    margin-bottom: 0;
+}
+
+.group-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.group-title svg {
+    width: 14px;
+    height: 14px;
+    color: var(--gray-400);
+    flex-shrink: 0;
+}
+
+.group-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lottery-option {
+    padding: 9px 16px;
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lottery-option:active {
+    transform: scale(0.95);
+}
+
+.lottery-option.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* ===================================
+   主内容区
+   =================================== */
+.main-content {
+    padding: 12px;
+}
+
+/* ===================================
+   当前开奖信息卡片 - 参照PC版
+   =================================== */
+.current-result-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 装饰背景 */
+.current-result-bar::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.result-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.result-info .period {
+    font-size: 12px;
+    color: var(--gray-400);
+    font-weight: 500;
+}
+
+.dice-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.mini-dice {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(145deg, #fff 0%, #f1f5f9 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-700);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.sum-text {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--gray-800);
+    margin-left: 4px;
+}
+
+.attr {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.attr.big { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+.attr.small { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
+.attr.odd { background: rgba(139, 92, 246, 0.1); color: #7c3aed; }
+.attr.even { background: rgba(16, 185, 129, 0.1); color: #059669; }
+
+/* 倒计时 */
+.countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.countdown-time {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+.countdown-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 500;
+}
+
+/* ===================================
+   筛选条件栏 - 参照PC版
+   =================================== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+    margin-bottom: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-500);
+}
+
+.filter-check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-600);
+    cursor: pointer;
+}
+
+.filter-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    border-radius: 3px;
+}
+
+/* ===================================
+   路子图类型切换 - 参照走势页Tab
+   =================================== */
+.road-type-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.road-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.road-tab:active {
+    transform: scale(0.97);
+}
+
+.road-tab .tab-icon {
+    font-size: 18px;
+}
+
+.road-tab.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+}
+
+/* ===================================
+   路子图内容区
+   =================================== */
+.road-content {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.road-panel {
+    display: none;
+    padding: 16px;
+    animation: panelFadeIn 0.35s ease;
+}
+
+.road-panel.active {
+    display: block;
+}
+
+@keyframes panelFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================
+   统计概览 - 参照PC版stats卡片
+   =================================== */
+.stats-overview {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.stats-overview .stat-item {
+    flex: 1;
+    padding: 14px 10px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.stats-overview .stat-item.big {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.03) 100%);
+    border-color: rgba(239, 68, 68, 0.1);
+}
+
+.stats-overview .stat-item.small {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.03) 100%);
+    border-color: rgba(59, 130, 246, 0.1);
+}
+
+.stats-overview .stat-item.odd {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
+    border-color: rgba(139, 92, 246, 0.1);
+}
+
+.stats-overview .stat-item.even {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.03) 100%);
+    border-color: rgba(16, 185, 129, 0.1);
+}
+
+.stats-overview .stat-item.streak {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f9 100%);
+    border-color: #e8edf5;
+}
+
+.stat-label {
+    display: block;
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.stat-item.big .stat-value { color: #dc2626; }
+.stat-item.small .stat-value { color: #2563eb; }
+.stat-item.odd .stat-value { color: #8b5cf6; }
+.stat-item.even .stat-value { color: #10b981; }
+
+.stat-percent {
+    display: block;
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.streak-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    margin-top: 4px;
+}
+
+.streak-badge.big { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); }
+.streak-badge.small { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3); }
+.streak-badge.odd { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3); }
+.streak-badge.even { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
+
+/* ===================================
+   路子图区块 - section
+   =================================== */
+.road-section {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.road-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.section-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-header h3::before {
+    content: '';
+    width: 4px;
+    height: 14px;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 2px;
+}
+
+.legend {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--gray-400);
+    font-weight: 500;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.legend .dot.red { background: linear-gradient(145deg, #ef4444 0%, #dc2626 100%); }
+.legend .dot.blue { background: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%); }
+.legend .dot.purple { background: linear-gradient(145deg, #8b5cf6 0%, #7c3aed 100%); }
+.legend .dot.green { background: linear-gradient(145deg, #10b981 0%, #059669 100%); }
+
+.tip {
+    font-size: 10px;
+    color: var(--gray-400);
+    background: var(--gray-50);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* ===================================
+   珠盘路 - 参照PC版精致化
+   =================================== */
+.bead-plate {
+    display: grid;
+    grid-template-rows: repeat(6, 24px);
+    grid-auto-flow: column;
+    grid-auto-columns: 24px;
+    gap: 4px;
+    padding: 10px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f4f9 100%);
+    border-radius: 12px;
+    border: 1px solid #e8edf5;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* 网格背景线 */
+    background:
+        repeating-linear-gradient(to right, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 28px),
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 28px),
+        linear-gradient(135deg, #f8fafc 0%, #f0f4f9 100%);
+}
+
+.bead-plate::-webkit-scrollbar {
+    display: none;
+}
+
+.bead {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    color: white;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+}
+
+.bead:active {
+    transform: scale(1.15);
+}
+
+.bead.big { background: linear-gradient(145deg, #ef4444 0%, #dc2626 100%); box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3); }
+.bead.small { background: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3); }
+.bead.odd { background: linear-gradient(145deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 1px 3px rgba(139, 92, 246, 0.3); }
+.bead.even { background: linear-gradient(145deg, #10b981 0%, #059669 100%); box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3); }
+
+.bead.latest {
+    box-shadow: 0 0 0 1.5px white, 0 0 0 3px #fbbf24;
+    animation: latestPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes latestPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+/* ===================================
+   大路 - 参照PC版添加网格线
+   =================================== */
+.big-road-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 10px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f4f9 100%);
+    border-radius: 12px;
+    border: 1px solid #e8edf5;
+}
+
+.big-road-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.big-road {
+    display: grid;
+    grid-template-rows: repeat(6, 24px);
+    grid-auto-flow: column;
+    grid-auto-columns: 24px;
+    gap: 4px;
+    width: max-content;
+    min-width: 100%;
+    /* 网格背景线 */
+    background:
+        repeating-linear-gradient(to right, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04) 1px, transparent 1px, transparent 28px),
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04) 1px, transparent 1px, transparent 28px);
+}
+
+.road-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid;
+    box-sizing: border-box;
+    transition: transform 0.15s ease;
+}
+
+.road-dot:active {
+    transform: scale(1.15);
+}
+
+.road-dot.big { border-color: #ef4444; background: transparent; }
+.road-dot.small { border-color: #3b82f6; background: transparent; }
+.road-dot.odd { border-color: #8b5cf6; background: transparent; }
+.road-dot.even { border-color: #10b981; background: transparent; }
+.road-dot.filled.big { background: linear-gradient(145deg, #ef4444 0%, #dc2626 100%); border-color: #ef4444; }
+.road-dot.filled.small { background: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%); border-color: #3b82f6; }
+.road-dot.filled.odd { background: linear-gradient(145deg, #8b5cf6 0%, #7c3aed 100%); border-color: #8b5cf6; }
+.road-dot.filled.even { background: linear-gradient(145deg, #10b981 0%, #059669 100%); border-color: #10b981; }
+
+.road-dot.latest {
+    box-shadow: 0 0 0 1.5px white, 0 0 0 3px #fbbf24;
+    position: relative;
+    z-index: 1;
+    animation: latestPulse 1.5s ease-in-out infinite;
+}
+
+/* ===================================
+   下三路 - 参照PC版卡片式
+   =================================== */
+.road-section.derived {
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    margin: 0 -16px -16px;
+    padding: 16px;
+    border-radius: 0 0 16px 16px;
+    border-bottom: none;
+}
+
+.derived-roads {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.derived-road-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8edf5;
+}
+
+.derived-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e8edf5;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-700);
+}
+
+.derived-header .sub-legend {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gray-400);
+}
+
+.derived-header .sub-legend span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mini-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mini-dot.red { background: linear-gradient(145deg, #ef4444 0%, #dc2626 100%); }
+.mini-dot.blue { background: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%); }
+
+.derived-grid {
+    display: grid;
+    grid-template-rows: repeat(6, 14px);
+    grid-template-columns: repeat(15, 14px);
+    gap: 3px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 10px;
+    /* 网格背景线 */
+    background:
+        repeating-linear-gradient(to right, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 17px),
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 17px);
+}
+
+.derived-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.derived-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.derived-dot.red { background: linear-gradient(145deg, #ef4444 0%, #dc2626 100%); }
+.derived-dot.blue { background: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%); }
+
+/* ===================================
+   底部统计信息栏 - 参照PC版
+   =================================== */
+.stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.06) 0%, rgba(59, 130, 246, 0.02) 100%);
+    border-radius: 12px;
+    margin-top: 16px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    flex-wrap: wrap;
+}
+
+.stats-bar .stats-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stats-bar .stats-label {
+    font-size: 11px;
+    color: var(--gray-500);
+    font-weight: 500;
+}
+
+.stats-bar .stats-value {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.stats-bar .stats-value.red { color: #dc2626; }
+.stats-bar .stats-value.blue { color: #2563eb; }
+
+.stats-bar .streak-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.stats-bar .streak-tag.red {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.stats-bar .streak-tag.blue {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+}
+
+/* ===================================
+   底部导航
+   =================================== */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(56px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    background: white;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tab-bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.tab-bar-item .tab-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.tab-bar-item .tab-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tab-bar-item span {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.tab-bar-item.active {
+    color: var(--primary);
+}
+
+
+/* ===================================
+   看图指南 - 浮动按钮
+   =================================== */
+.road-guide-fab {
+    position: fixed;
+    bottom: calc(70px + var(--safe-bottom, 0px));
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    border-radius: 24px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 80;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease;
+    animation: fabPulse 3s ease-in-out infinite;
+}
+
+.road-guide-fab svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.road-guide-fab:active {
+    transform: scale(0.92);
+}
+
+@keyframes fabPulse {
+    0%, 100% { box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4); }
+    50% { box-shadow: 0 4px 24px rgba(37, 99, 235, 0.6); }
+}
+
+/* ===================================
+   看图指南 - 弹窗
+   =================================== */
+.road-guide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 500;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.road-guide-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.road-guide-overlay .guide-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+.road-guide-overlay .guide-sheet {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 70vh;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.road-guide-overlay.show .guide-sheet {
+    transform: translateY(0);
+}
+
+.guide-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--gray-200);
+    border-radius: 4px;
+    margin: 10px auto 0;
+    flex-shrink: 0;
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 10px;
+    flex-shrink: 0;
+}
+
+.guide-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-header-left svg {
+    color: var(--primary);
+}
+
+.guide-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.guide-close {
+    width: 32px;
+    height: 32px;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.guide-close svg {
+    width: 16px;
+    height: 16px;
+    color: var(--gray-400);
+}
+
+.guide-close:active {
+    background: var(--gray-200);
+    transform: scale(0.92);
+}
+
+/* 说明tab */
+.guide-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 0 16px 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+}
+
+.guide-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.guide-tab {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    background: var(--gray-50);
+    border: 1.5px solid transparent;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.guide-tab.active {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.guide-tab:active {
+    transform: scale(0.95);
+}
+
+/* 说明内容 */
+.guide-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.guide-section {
+    display: none;
+}
+
+.guide-section.active {
+    display: block;
+    animation: guideIn 0.3s ease;
+}
+
+@keyframes guideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 说明卡片 */
+.guide-card {
+    background: var(--gray-50);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+
+.guide-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+}
+
+.guide-card-text {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.7;
+}
+
+/* 图例 */
+.guide-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-dot.red { background: #ef4444; }
+.legend-dot.blue { background: #3b82f6; }
+.legend-dot.green { background: #22c55e; }
+.legend-dot.orange { background: #f59e0b; }
+.legend-dot.purple { background: #8b5cf6; }
+
+/* 提示栏 */
+.guide-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--primary);
+}
+
+.guide-tip svg {
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.guide-tip span {
+    font-size: 12px;
+    color: #1e40af;
+    line-height: 1.6;
+}
+
+/* 指南内表格 */
+.guide-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e8edf5;
+}
+
+.guide-table th,
+.guide-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #edf2f7;
+    border-right: 1px solid #edf2f7;
+}
+
+.guide-table th:last-child,
+.guide-table td:last-child {
+    border-right: none;
+}
+
+.guide-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.guide-table th {
+    background: linear-gradient(135deg, #e8edf5 0%, #dfe5f0 100%);
+    font-weight: 700;
+    color: var(--gray-600);
+}
+
+.guide-table td {
+    color: var(--gray-700);
+    background: white;
+}
+
+.guide-table td:first-child {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.guide-table tbody tr:nth-child(even) td {
+    background: #fafbfd;
+}

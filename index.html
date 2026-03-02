@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>开奖网 - 专业彩票开奖平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=DIN+Alternate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260228">
+</head>
+<body>
+    <!-- 顶部状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">09:41</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span>开</span>
+                </div>
+                <div class="logo-text">
+                    <span class="brand">开奖网</span>
+                    <span class="slogan">实时开奖 · 专业分析</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="action-btn" id="searchBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="message.html" class="action-btn has-badge" id="msgBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="badge">5</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="app-main">
+        <!-- 跑马灯公告 -->
+        <div class="marquee-bar">
+            <div class="marquee-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <div class="marquee-content">
+                <div class="marquee-scroll">
+                    <span>🎉 恭喜用户 187****5632 中得快三大奖 28,800元</span>
+                    <span>📢 系统公告：春节期间开奖时间调整通知</span>
+                    <span>🔥 双色球奖池累积5.2亿，今晚21:15开奖</span>
+                    <span>💰 恭喜用户 136****8821 中得PK10冠军 12,500元</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner轮播 -->
+        <div class="banner-swiper">
+            <div class="swiper-wrapper" id="bannerWrapper">
+                <div class="swiper-slide active">
+                    <div class="banner-card gradient-blue">
+                        <div class="banner-content">
+                            <span class="banner-tag">热门活动</span>
+                            <h3>新用户专享礼包</h3>
+                            <p>注册即送88元分析券</p>
+                        </div>
+                        <div class="banner-image">🎁</div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-card gradient-purple">
+                        <div class="banner-content">
+                            <span class="banner-tag">功能升级</span>
+                            <h3>AI智能预测上线</h3>
+                            <p>大数据分析 精准推荐</p>
+                        </div>
+                        <div class="banner-image">🤖</div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- 快捷入口 -->
+        <div class="quick-entry">
+            <a href="goodroad.html" class="entry-item">
+                <div class="entry-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                    </svg>
+                </div>
+                <span class="entry-name">好路推荐</span>
+            </a>
+            <a href="killplan.html" class="entry-item">
+                <div class="entry-icon red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                </div>
+                <span class="entry-name">杀号计划</span>
+            </a>
+            <a href="dragon.html" class="entry-item">
+                <div class="entry-icon orange">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                </div>
+                <span class="entry-name">长龙排行</span>
+            </a>
+            <a href="news.html" class="entry-item">
+                <div class="entry-icon purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                        <path d="M18 14h-8"></path>
+                        <path d="M15 18h-5"></path>
+                        <path d="M10 6h8v4h-8V6z"></path>
+                    </svg>
+                </div>
+                <span class="entry-name">彩民新闻</span>
+            </a>
+        </div>
+
+        <!-- 开奖分类 -->
+        <div class="lottery-tabs">
+            <button class="all-lottery-btn" id="allLotteryBtn" onclick="openAllLottery()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+                </svg>
+            </button>
+            <div class="tabs-scroll">
+                <button class="tab-item" data-tab="favorite">收藏</button>
+                <button class="tab-item active" data-tab="dongfang">东方彩票</button>
+                <button class="tab-item" data-tab="kuaisan">快三</button>
+                <button class="tab-item" data-tab="ssc">时时彩系列</button>
+                <button class="tab-item" data-tab="pk">PK系列</button>
+                <button class="tab-item" data-tab="pc28">PC28</button>
+                <button class="tab-item" data-tab="11x5">11选5系列</button>
+                <button class="tab-item" data-tab="letou">乐透彩</button>
+                <button class="tab-item" data-tab="kuaile">快乐十分</button>
+                <button class="tab-item" data-tab="other">其他</button>
+            </div>
+        </div>
+
+        <!-- 开奖列表 -->
+        <div class="lottery-list" id="lotteryList">
+            <!-- 快三 -->
+            <div class="lottery-card" data-type="kuaisan">
+                <div class="card-left">
+                    <div class="lottery-badge kuaisan">
+                        <span>快三</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">江苏快三</span>
+                        <span class="period">第 20260205-0350 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="dice-group">
+                            <div class="dice" data-value="4"></div>
+                            <div class="dice" data-value="2"></div>
+                            <div class="dice" data-value="6"></div>
+                        </div>
+                        <div class="result-attrs">
+                            <span class="attr big">大</span>
+                            <span class="attr even">双</span>
+                            <span class="attr sum">12</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="45">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">45</span>
+                    </div>
+                    <span class="countdown-label">秒后开奖</span>
+                </div>
+            </div>
+
+            <!-- PK10 -->
+            <div class="lottery-card" data-type="pk10">
+                <div class="card-left">
+                    <div class="lottery-badge pk10">
+                        <span>PK10</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">北京PK10</span>
+                        <span class="period">第 20260205-089 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="ball-group pk10">
+                            <span class="ball n1">01</span>
+                            <span class="ball n2">05</span>
+                            <span class="ball n3">03</span>
+                            <span class="ball n4">08</span>
+                            <span class="ball n5">10</span>
+                            <span class="ball n6">02</span>
+                            <span class="ball n7">07</span>
+                            <span class="ball n8">04</span>
+                            <span class="ball n9">09</span>
+                            <span class="ball n10">06</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="120">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">2:00</span>
+                    </div>
+                    <span class="countdown-label">后开奖</span>
+                </div>
+            </div>
+
+            <!-- 时时彩 -->
+            <div class="lottery-card" data-type="ssc">
+                <div class="card-left">
+                    <div class="lottery-badge ssc">
+                        <span>时彩</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">重庆时时彩</span>
+                        <span class="period">第 20260205-032 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="ball-group ssc">
+                            <span class="ball">3</span>
+                            <span class="ball">7</span>
+                            <span class="ball">1</span>
+                            <span class="ball">9</span>
+                            <span class="ball">2</span>
+                        </div>
+                        <div class="result-attrs">
+                            <span class="attr big">大</span>
+                            <span class="attr odd">单</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="180">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">3:00</span>
+                    </div>
+                    <span class="countdown-label">后开奖</span>
+                </div>
+            </div>
+
+            <!-- PC28 -->
+            <div class="lottery-card" data-type="pc28">
+                <div class="card-left">
+                    <div class="lottery-badge pc28">
+                        <span>PC28</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">加拿大PC28</span>
+                        <span class="period">第 20260205-234 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="pc28-group">
+                            <span class="num">09</span>
+                            <span class="op">+</span>
+                            <span class="num">12</span>
+                            <span class="op">+</span>
+                            <span class="num">06</span>
+                            <span class="op">=</span>
+                            <span class="sum">27</span>
+                        </div>
+                        <div class="result-attrs">
+                            <span class="attr big">大</span>
+                            <span class="attr odd">单</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="90">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">1:30</span>
+                    </div>
+                    <span class="countdown-label">后开奖</span>
+                </div>
+            </div>
+
+            <!-- 11选5 -->
+            <div class="lottery-card" data-type="11x5">
+                <div class="card-left">
+                    <div class="lottery-badge x11">
+                        <span>11选5</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">广东11选5</span>
+                        <span class="period">第 20260205-045 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="ball-group x11">
+                            <span class="ball">02</span>
+                            <span class="ball">05</span>
+                            <span class="ball">08</span>
+                            <span class="ball">09</span>
+                            <span class="ball">11</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="60">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">60</span>
+                    </div>
+                    <span class="countdown-label">秒后开奖</span>
+                </div>
+            </div>
+
+            <!-- 幸运飞艇 -->
+            <div class="lottery-card" data-type="xyft">
+                <div class="card-left">
+                    <div class="lottery-badge xyft">
+                        <span>飞艇</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="lottery-title">
+                        <span class="name">幸运飞艇</span>
+                        <span class="period">第 20260205-156 期</span>
+                    </div>
+                    <div class="lottery-result">
+                        <div class="ball-group pk10">
+                            <span class="ball n1">03</span>
+                            <span class="ball n2">07</span>
+                            <span class="ball n3">01</span>
+                            <span class="ball n4">10</span>
+                            <span class="ball n5">05</span>
+                            <span class="ball n6">08</span>
+                            <span class="ball n7">02</span>
+                            <span class="ball n8">06</span>
+                            <span class="ball n9">04</span>
+                            <span class="ball n10">09</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="countdown-ring" data-seconds="150">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="16"></circle>
+                            <circle class="progress" cx="18" cy="18" r="16"></circle>
+                        </svg>
+                        <span class="time">2:30</span>
+                    </div>
+                    <span class="countdown-label">后开奖</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 全部彩种弹窗 -->
+    <div class="all-lottery-overlay" id="allLotteryOverlay">
+        <div class="all-lottery-panel">
+            <!-- 头部 -->
+            <div class="all-lottery-header">
+                <h3>全部彩种</h3>
+                <button class="all-lottery-close" onclick="closeAllLottery()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- 搜索 -->
+            <div class="all-lottery-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="lotterySearchInput" placeholder="搜索彩种名称..." oninput="filterAllLottery()">
+            </div>
+            <!-- 分类Tab -->
+            <div class="all-lottery-tabs">
+                <button class="al-tab active" data-tab="hot" onclick="switchAllLotteryTab(this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    热门彩
+                </button>
+                <button class="al-tab" data-tab="company" onclick="switchAllLotteryTab(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+                    按公司
+                </button>
+                <button class="al-tab" data-tab="type" onclick="switchAllLotteryTab(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                    按彩种
+                </button>
+                <button class="al-tab" data-tab="region" onclick="switchAllLotteryTab(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                    按地区
+                </button>
+            </div>
+            <!-- 内容区 -->
+            <div class="all-lottery-body" id="allLotteryBody">
+                <!-- 热门彩 -->
+                <div class="al-section active" data-tab="hot">
+                    <div class="al-group">
+                        <div class="al-group-title">
+                            <span class="al-hot-badge">🔥</span>热门彩
+                        </div>
+                        <div class="al-items">
+                            <button class="al-item hot" data-id="kuaisan">快三<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="yuxiaxie">鱼虾蟹<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="saiche">赛车<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="liuhecai">六合彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="shishicai">时时彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="pc28">PC28<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="niuniu">百人牛牛<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="longhu">龙虎<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="sangong">三公<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="baijiale">百家乐<span class="al-badge hot">热</span></button>
+                            <button class="al-item hot" data-id="lunpan">轮盘<span class="al-badge hot">热</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按公司 -->
+                <div class="al-section" data-tab="company">
+                    <div class="al-group">
+                        <div class="al-group-title">东方彩票</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="kuaisan">快三<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="yuxiaxie">鱼虾蟹<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="saiche">赛车<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="liuhecai">六合彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="shishicai">时时彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="pc28">PC28<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="niuniu">百人牛牛<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="longhu">龙虎<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="sangong">三公<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="baijiale">百家乐<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="lunpan">轮盘<span class="al-badge hot">热</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">中国体育彩票</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="pailie3">排列3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="pailie5">排列5<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">中国福利彩票</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="fc3d">福彩3D</button>
+                            <button class="al-item" data-id="qlc">福彩七乐彩</button>
+                            <button class="al-item" data-id="ssq">福彩双色球</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">香港赛马会</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="hklhc">香港六合彩</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">多彩网365</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="tjklsf">天津快乐十分</button>
+                            <button class="al-item" data-id="gdklsf">广东快乐十分</button>
+                            <button class="al-item" data-id="jlk3">吉林快3</button>
+                            <button class="al-item" data-id="ahk3">安徽快3</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">998开奖网</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="gd11x5">广东11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="sh11x5">上海11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jx11x5">江西11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="js11x5">江苏11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="syydj">十一运夺金<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="xjssc">新疆时时彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="hbk3">河北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jlcqssc">旧重庆时时彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="hbk3n">湖北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jsk3">江苏快3<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">世界彩票</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="fslhc">飙速六合彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fssc">飙速赛车<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fsssc">飙速时时彩<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">Power Play</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="powerball">Power Ball</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按彩种 -->
+                <div class="al-section" data-tab="type">
+                    <div class="al-group">
+                        <div class="al-group-title">快三</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="kuaisan">快三<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="sgk3">SG快3</button>
+                            <button class="al-item" data-id="jsk3n">极速快3</button>
+                            <button class="al-item" data-id="hbk3">河北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jlk3">吉林快3</button>
+                            <button class="al-item" data-id="ahk3">安徽快3</button>
+                            <button class="al-item" data-id="hbk3n">湖北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jsk3">江苏快3<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">时时彩系列</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="shishicai">时时彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="pailie3">排列3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="pailie5">排列5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fc3d">福彩3D</button>
+                            <button class="al-item" data-id="bcssc">波场时时彩</button>
+                            <button class="al-item" data-id="tw5fc">台湾5分彩</button>
+                            <button class="al-item" data-id="jsssc">极速时时彩</button>
+                            <button class="al-item" data-id="sgssc">SG时时彩</button>
+                            <button class="al-item" data-id="xjssc">新疆时时彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jlcqssc">旧重庆时时彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fsssc">飙速时时彩<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">PK系列</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="saiche">赛车<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="niuniu">百人牛牛<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="longhu">龙虎<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="sangong">三公<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="baijiale">百家乐<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="xyft">幸运飞艇</button>
+                            <button class="al-item" data-id="jsft">极速飞艇</button>
+                            <button class="al-item" data-id="jssc">极速赛车</button>
+                            <button class="al-item" data-id="fssc">飙速赛车<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">PC28</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="pc28">PC28<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="jnd28">加拿大28</button>
+                            <button class="al-item" data-id="pcddxy28">PC蛋蛋幸运28</button>
+                            <button class="al-item" data-id="jsdd">极速蛋蛋</button>
+                            <button class="al-item" data-id="krxy28">韩国幸运28<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">11选5系列</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="gd11x5">广东11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="sh11x5">上海11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jx11x5">江西11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="js11x5">江苏11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="syydj">十一运夺金<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="sg11x5">SG11选5</button>
+                            <button class="al-item" data-id="js11x5n">极速11选5</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">乐透彩</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="liuhecai">六合彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="cjbw">超级百万</button>
+                            <button class="al-item" data-id="twbg">台湾宾果</button>
+                            <button class="al-item" data-id="hklhc">香港六合彩</button>
+                            <button class="al-item" data-id="ssq">福彩双色球</button>
+                            <button class="al-item" data-id="dlt">超级大乐透</button>
+                            <button class="al-item" data-id="fslhc">飙速六合彩<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">快乐十分</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="gdklsf">广东快乐十分</button>
+                            <button class="al-item" data-id="tjklsf">天津快乐十分</button>
+                            <button class="al-item" data-id="sgklsf">SG快乐十分</button>
+                            <button class="al-item" data-id="jsklsf">极速快乐十分</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按地区 -->
+                <div class="al-section" data-tab="region">
+                    <div class="al-group">
+                        <div class="al-group-title">🇨🇳 中国</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="kuaisan">快三<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="yuxiaxie">鱼虾蟹<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="saiche">赛车<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="liuhecai">六合彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="shishicai">时时彩<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="pc28">PC28<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="niuniu">百人牛牛<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="longhu">龙虎<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="sangong">三公<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="baijiale">百家乐<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="lunpan">轮盘<span class="al-badge hot">热</span></button>
+                            <button class="al-item" data-id="xyft">幸运飞艇</button>
+                            <button class="al-item" data-id="pailie3">排列3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="pailie5">排列5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fc3d">福彩3D</button>
+                            <button class="al-item" data-id="hklhc">香港六合彩</button>
+                            <button class="al-item" data-id="ssq">福彩双色球</button>
+                            <button class="al-item" data-id="qlc">福彩七乐彩</button>
+                            <button class="al-item" data-id="dlt">超级大乐透</button>
+                            <button class="al-item" data-id="gd11x5">广东11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="sh11x5">上海11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jx11x5">江西11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="js11x5">江苏11选5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="xjssc">新疆时时彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="hbk3">河北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jlk3">吉林快3</button>
+                            <button class="al-item" data-id="ahk3">安徽快3</button>
+                            <button class="al-item" data-id="hbk3n">湖北快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="jsk3">江苏快3<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="gdklsf">广东快乐十分</button>
+                            <button class="al-item" data-id="tjklsf">天津快乐十分</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇨🇦 加拿大</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="jnd28">加拿大28</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇬🇧 英国</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="cjbw">超级百万</button>
+                            <button class="al-item" data-id="yglthp">乐透 Hotpicks</button>
+                            <button class="al-item" data-id="bwoy">百万欧元</button>
+                            <button class="al-item" data-id="yglt10">英国乐透10</button>
+                            <button class="al-item" data-id="yglt5">英国乐透5</button>
+                            <button class="al-item" data-id="yglt8">英国乐透8</button>
+                            <button class="al-item" data-id="yglt20">英国乐透20</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇺🇸 美国</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="hx5">幻想 5</button>
+                            <button class="al-item" data-id="c4l">CASH4LIFE</button>
+                            <button class="al-item" data-id="powerball">Power Ball</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇰🇷 韩国</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="krxy10">韩国幸运10<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="krxy5">韩国幸运5<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="krxy28">韩国幸运28<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇦🇺 澳洲</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="ozxy20">澳洲幸运20</button>
+                            <button class="al-item" data-id="ozxy10">澳洲幸运10</button>
+                            <button class="al-item" data-id="ozxy5">澳洲幸运5</button>
+                            <button class="al-item" data-id="ozxy8">澳洲幸运8</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇻🇳 越南</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="hn5fc">河内5分彩<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🇸🇬 新加坡</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="sgk3">SG快3</button>
+                            <button class="al-item" data-id="sgk8">SG快乐8</button>
+                            <button class="al-item" data-id="sgssc">SG时时彩</button>
+                            <button class="al-item" data-id="sgft">SG飞艇</button>
+                            <button class="al-item" data-id="sg11x5">SG11选5</button>
+                            <button class="al-item" data-id="sgklsf">SG快乐十分</button>
+                        </div>
+                    </div>
+                    <div class="al-group">
+                        <div class="al-group-title">🌍 其他</div>
+                        <div class="al-items">
+                            <button class="al-item" data-id="bcssc">波场时时彩</button>
+                            <button class="al-item" data-id="tw5fc">台湾5分彩</button>
+                            <button class="al-item" data-id="twbg">台湾宾果</button>
+                            <button class="al-item" data-id="fslhc">飙速六合彩<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fssc">飙速赛车<span class="al-badge new">新</span></button>
+                            <button class="al-item" data-id="fsssc">飙速时时彩<span class="al-badge new">新</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 搜索为空 -->
+            <div class="al-empty" id="alEmpty" style="display:none">
+                <div class="al-empty-icon">🔍</div>
+                <p>未找到相关彩种</p>
+                <span>换个关键词试试</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="tab-bar">
+        <a href="index.html" class="tab-bar-item active">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.5V19a2 2 0 002 2h10a2 2 0 002-2v-6.5"/>
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M14 21v-4a2 2 0 00-4 0v4"/>
+                </svg>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="trend.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 16 12 12 8 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <span>走势</span>
+        </a>
+        <a href="roadmap.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+            </div>
+            <span>路子图</span>
+        </a>
+        <a href="me.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21a7 7 0 0114 0"/>
+                </svg>
+            </div>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script src="app.js?v=20260228"></script>
+    <!-- Twemoji: 将 emoji 渲染为高清 SVG 图片, 跨平台一致显示 -->
+    <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script>
+    // 彩种图标注入 (Twemoji 方案)
+    (function(){
+        var m = {
+            'kuaisan':'🎲','sgk3':'🎲','jsk3n':'⚡','hbk3':'🎲','jlk3':'🎲','ahk3':'🎲','hbk3n':'🎲','jsk3':'🎲',
+            'yuxiaxie':'🦐','saiche':'🏎️','jssc':'🏎️','fssc':'🚀','xyft':'✈️','jsft':'⚡','sgft':'✈️',
+            'liuhecai':'🎱','hklhc':'🎱','fslhc':'🚀','ssq':'🔴','dlt':'🎰','cjbw':'💰','twbg':'🎰','qlc':'🎯',
+            'shishicai':'⏱️','bcssc':'💎','tw5fc':'⏱️','jsssc':'⚡','sgssc':'⏱️','xjssc':'⏱️','jlcqssc':'⏱️','fsssc':'🚀','hn5fc':'⏱️',
+            'pc28':'🔢','jnd28':'🍁','pcddxy28':'🥚','jsdd':'⚡','krxy28':'🍀',
+            'niuniu':'🐂','longhu':'🐉','sangong':'🃏','baijiale':'♠️','lunpan':'🎡',
+            'gd11x5':'🎯','sh11x5':'🎯','jx11x5':'🎯','js11x5':'🎯','syydj':'🏆','sg11x5':'🎯','js11x5n':'⚡',
+            'gdklsf':'😄','tjklsf':'😄','sgklsf':'😄','jsklsf':'⚡','sgk8':'😄',
+            'pailie3':'🔢','pailie5':'🔢','fc3d':'🎰',
+            'krxy10':'🍀','krxy5':'🍀','ozxy20':'🦘','ozxy10':'🦘','ozxy5':'🦘','ozxy8':'🦘',
+            'yglthp':'🎯','bwoy':'💶','yglt10':'🔟','yglt5':'5️⃣','yglt8':'8️⃣','yglt20':'🔢',
+            'hx5':'🌟','c4l':'💵','powerball':'💰'
+        };
+        function injectIcons() {
+            var btns = document.querySelectorAll('.al-item[data-id]');
+            for(var i=0;i<btns.length;i++){
+                if(btns[i].querySelector('.al-icon')) continue;
+                var id = btns[i].getAttribute('data-id');
+                if(m[id]){
+                    var s = document.createElement('span');
+                    s.className = 'al-icon';
+                    s.textContent = m[id];
+                    btns[i].insertBefore(s, btns[i].firstChild);
+                }
+            }
+            // 用 Twemoji 将 emoji 文字转为 SVG <img> 标签
+            if(typeof twemoji !== 'undefined'){
+                document.querySelectorAll('.al-icon').forEach(function(el){
+                    twemoji.parse(el, { folder: 'svg', ext: '.svg' });
+                });
+            }
+        }
+        // 确保 DOM 和 Twemoji 都就绪
+        if(document.readyState === 'loading'){
+            document.addEventListener('DOMContentLoaded', injectIcons);
+        } else {
+            injectIcons();
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>走势分析 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="trend.css">
+</head>
+<body class="trend-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <!-- 彩种选择按钮 -->
+        <button class="lottery-picker" id="lotteryPicker">
+            <div class="picker-icon-wrap">
+                <span class="picker-icon">🎲</span>
+            </div>
+            <span class="picker-name" id="currentLotteryName">快三</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <button class="fav-btn" id="favBtn" title="收藏此彩种">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 彩种选择弹窗 -->
+    <div class="lottery-modal" id="lotteryModal">
+        <div class="modal-mask"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>选择彩种</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 东方彩票 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        东方彩票
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option active" data-lottery="kuaisan" data-icon="🎲">快三</button>
+                        <button class="lottery-option" data-lottery="yuxiaxie" data-icon="🦐">鱼虾蟹</button>
+                        <button class="lottery-option" data-lottery="saiche" data-icon="🏎️">赛车</button>
+                        <button class="lottery-option" data-lottery="liuhecai" data-icon="🎱">六合彩</button>
+                        <button class="lottery-option" data-lottery="shishicai" data-icon="⏱️">时时彩</button>
+                        <button class="lottery-option" data-lottery="niuniu" data-icon="🐂">百人牛牛</button>
+                        <button class="lottery-option" data-lottery="longhu" data-icon="🐉">龙虎</button>
+                        <button class="lottery-option" data-lottery="sangong" data-icon="🃏">三公</button>
+                        <button class="lottery-option" data-lottery="baijiale" data-icon="♠️">百家乐</button>
+                        <button class="lottery-option" data-lottery="lunpan" data-icon="🎡">轮盘</button>
+                    </div>
+                </div>
+                <!-- 快三 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                        快三
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="jsk3" data-icon="🎲">江苏快三</button>
+                        <button class="lottery-option" data-lottery="ahk3" data-icon="🎲">安徽快三</button>
+                        <button class="lottery-option" data-lottery="hbk3" data-icon="🎲">湖北快三</button>
+                    </div>
+                </div>
+                <!-- 时时彩系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        时时彩系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="cqssc" data-icon="⏱️">重庆时时彩</button>
+                        <button class="lottery-option" data-lottery="xjssc" data-icon="⏱️">新疆时时彩</button>
+                        <button class="lottery-option" data-lottery="tjssc" data-icon="⏱️">天津时时彩</button>
+                    </div>
+                </div>
+                <!-- PK系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
+                        PK系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="pk10" data-icon="🏎️">北京PK10</button>
+                        <button class="lottery-option" data-lottery="xyft" data-icon="✈️">幸运飞艇</button>
+                    </div>
+                </div>
+                <!-- PC28 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        PC28
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="jndpc28" data-icon="🔢">加拿大PC28</button>
+                        <button class="lottery-option" data-lottery="bjpc28" data-icon="🔢">北京PC28</button>
+                    </div>
+                </div>
+                <!-- 11选5系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        11选5系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="gd11x5" data-icon="🎯">广东11选5</button>
+                        <button class="lottery-option" data-lottery="sh11x5" data-icon="🎯">上海11选5</button>
+                    </div>
+                </div>
+                <!-- 乐透彩 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        乐透彩
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="ssq" data-icon="🎱">双色球</button>
+                        <button class="lottery-option" data-lottery="dlt" data-icon="🎱">大乐透</button>
+                    </div>
+                </div>
+                <!-- 快乐十分 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        快乐十分
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="gdklsf" data-icon="😄">广东快乐十分</button>
+                        <button class="lottery-option" data-lottery="tjklsf" data-icon="😄">天津快乐十分</button>
+                    </div>
+                </div>
+                <!-- 其他 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                        其他
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="kl8" data-icon="🔢">快乐8</button>
+                        <button class="lottery-option" data-lottery="3d" data-icon="🎰">福彩3D</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 当前开奖信息 -->
+        <div class="current-result-card">
+            <div class="result-left">
+                <div class="lottery-badge-wrap">
+                    <div class="lottery-badge kuaisan">
+                        <span>快三</span>
+                    </div>
+                </div>
+                <div class="result-detail">
+                    <div class="period-row">
+                        <span class="period-label">第</span>
+                        <span class="period-num" id="periodNum">20260228-0350</span>
+                        <span class="period-label">期</span>
+                    </div>
+                    <div class="dice-row">
+                        <div class="dice-cube" data-value="4">
+                            <div class="dice-face"></div>
+                        </div>
+                        <div class="dice-cube" data-value="2">
+                            <div class="dice-face"></div>
+                        </div>
+                        <div class="dice-cube" data-value="6">
+                            <div class="dice-face"></div>
+                        </div>
+                        <span class="sum-value">= 12</span>
+                        <div class="attr-group">
+                            <span class="attr big">大</span>
+                            <span class="attr even">双</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-countdown">
+                <div class="countdown-ring">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="bg" cx="18" cy="18" r="16" />
+                        <circle class="progress" cx="18" cy="18" r="16" id="countdownRing"/>
+                    </svg>
+                    <span class="time" id="countdown">45</span>
+                </div>
+                <span class="countdown-label">后开奖</span>
+            </div>
+        </div>
+
+        <!-- 走势类型选择 -->
+        <div class="trend-types" id="trendTypes">
+            <div class="types-scroll">
+                <button class="trend-type active" data-type="history">开奖记录</button>
+                <button class="trend-type" data-type="analysis">综合分析</button>
+                <button class="trend-type" data-type="position">定位走势</button>
+                <button class="trend-type" data-type="numbeads">号码路珠</button>
+                <button class="trend-type" data-type="sumbeads">总和路珠</button>
+                <button class="trend-type" data-type="basic">基本走势</button>
+                <button class="trend-type" data-type="dragon">每日长龙统计</button>
+                <button class="trend-type" data-type="size">大小走势</button>
+                <button class="trend-type" data-type="oddeven">奇偶走势</button>
+                <button class="trend-type" data-type="sumhistory">和值历史号码</button>
+                <button class="trend-type" data-type="rules">玩法说明</button>
+            </div>
+        </div>
+
+        <!-- 走势内容区 -->
+        <div class="trend-content" id="trendContent">
+            <!-- 开奖记录 -->
+            <div class="trend-panel active" id="historyPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                        <button class="date-btn">昨天</button>
+                    </div>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table record-table">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>期数</th>
+                                <th>显示号码</th>
+                                <th>总和</th>
+                                <th>大小</th>
+                                <th>单双</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 综合分析 -->
+            <div class="trend-panel" id="analysisPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近30期</button>
+                        <button class="date-btn">最近60期</button>
+                        <button class="date-btn">最近90期</button>
+                    </div>
+                </div>
+                <div class="stats-cards">
+                    <div class="stats-card">
+                        <div class="stats-title">豹子遗漏</div>
+                        <div class="stats-row" id="baoziStats"></div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-title">对子遗漏</div>
+                        <div class="stats-row" id="duiziStats"></div>
+                    </div>
+                </div>
+                <div class="stats-card full-width">
+                    <div class="stats-title blue">和值遗漏</div>
+                    <div class="table-scroll">
+                        <div class="stats-row wide" id="hezhiStats"></div>
+                    </div>
+                </div>
+                <div class="stats-card full-width">
+                    <div class="stats-title dark">期数统计</div>
+                    <div class="stats-row" id="qishuStats"></div>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table analysis-detail-table">
+                        <thead>
+                            <tr>
+                                <th>开奖</th>
+                                <th>和值</th>
+                                <th>大小</th>
+                                <th>双单</th>
+                                <th>对子</th>
+                                <th>豹子</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analysisTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 定位走势 -->
+            <div class="trend-panel" id="positionPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                        <button class="date-btn">昨天</button>
+                    </div>
+                </div>
+                <div class="panel-options">
+                    <span class="options-label">标注选择：</span>
+                    <label class="option-check"><input type="checkbox" checked><span>遗漏</span></label>
+                    <label class="option-check"><input type="checkbox" checked><span>折线</span></label>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table position-table">
+                        <thead>
+                            <tr class="header-group">
+                                <th rowspan="2">期号</th>
+                                <th colspan="10">第一位号码</th>
+                                <th colspan="10">第二位号码</th>
+                                <th colspan="10">第三位号码</th>
+                                <th rowspan="2">开奖号</th>
+                            </tr>
+                            <tr class="header-sub">
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th class="red">大</th><th class="blue">小</th><th class="orange">单</th><th class="purple">双</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th class="red">大</th><th class="blue">小</th><th class="orange">单</th><th class="purple">双</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th class="red">大</th><th class="blue">小</th><th class="orange">单</th><th class="purple">双</th>
+                            </tr>
+                        </thead>
+                        <tbody id="positionTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 号码路珠 -->
+            <div class="trend-panel" id="numbeadsPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="road-filters">
+                    <span class="filter-label">筛选名次：</span>
+                    <label class="road-check"><input type="checkbox" data-num="1" checked><span>号码1</span></label>
+                    <label class="road-check"><input type="checkbox" data-num="2" checked><span>号码2</span></label>
+                    <label class="road-check"><input type="checkbox" data-num="3" checked><span>号码3</span></label>
+                    <label class="road-check"><input type="checkbox" data-num="4" checked><span>号码4</span></label>
+                    <label class="road-check"><input type="checkbox" data-num="5" checked><span>号码5</span></label>
+                    <label class="road-check"><input type="checkbox" data-num="6" checked><span>号码6</span></label>
+                    <div class="road-actions">
+                        <button class="btn-text" id="selectAllRoad">全选</button>
+                        <button class="btn-text" id="clearAllRoad">清空</button>
+                    </div>
+                </div>
+                <div class="road-grids" id="roadGrids"></div>
+            </div>
+
+            <!-- 总和路珠 -->
+            <div class="trend-panel" id="sumbeadsPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="sum-road-grids" id="sumRoadGrids"></div>
+            </div>
+
+            <!-- 基本走势 -->
+            <div class="trend-panel" id="basicPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="panel-options">
+                    <span class="options-label">标注选择：</span>
+                    <label class="option-check"><input type="checkbox" checked><span>遗漏</span></label>
+                    <label class="option-check"><input type="checkbox" checked><span>折线</span></label>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table basic-table">
+                        <thead>
+                            <tr class="header-group">
+                                <th rowspan="2">期号</th>
+                                <th colspan="6">开奖号码分布</th>
+                                <th colspan="3">号码形态</th>
+                                <th colspan="16">和值走势</th>
+                                <th rowspan="2">开奖号</th>
+                            </tr>
+                            <tr class="header-sub">
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th class="orange">豹</th><th class="blue">三</th><th class="purple">对</th>
+                                <th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th>
+                                <th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+                                <th>15</th><th>16</th><th>17</th><th>18</th>
+                            </tr>
+                        </thead>
+                        <tbody id="basicTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 每日长龙统计 -->
+            <div class="trend-panel" id="dragonPanel">
+                <div class="panel-header">
+                    <span class="panel-title">每日长龙统计</span>
+                </div>
+                <div class="dragon-tabs">
+                    <button class="dragon-tab active" data-type="odd">单长龙</button>
+                    <button class="dragon-tab" data-type="even">双长龙</button>
+                    <button class="dragon-tab" data-type="big">大长龙</button>
+                    <button class="dragon-tab" data-type="small">小长龙</button>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table dragon-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">日期</th>
+                                <th rowspan="2">长龙</th>
+                                <th colspan="16">开"<span id="dragonTypeLabel">单</span>"长龙出现条数</th>
+                            </tr>
+                            <tr>
+                                <th>2期</th><th>3期</th><th>4期</th><th>5期</th>
+                                <th>6期</th><th>7期</th><th>8期</th><th>9期</th>
+                                <th>10期</th><th>11期</th><th>12期</th><th>13期</th>
+                                <th>14期</th><th>15期</th><th>16期</th><th>17期</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dragonTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 大小走势 -->
+            <div class="trend-panel" id="sizePanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="panel-options">
+                    <span class="options-label">标注选择：</span>
+                    <label class="option-check"><input type="checkbox" checked><span>遗漏</span></label>
+                    <label class="option-check"><input type="checkbox" checked><span>折线</span></label>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table size-table">
+                        <thead>
+                            <tr class="header-group">
+                                <th rowspan="2">期号</th>
+                                <th colspan="6">开奖号码分布</th>
+                                <th rowspan="2">百位</th>
+                                <th rowspan="2">十位</th>
+                                <th rowspan="2">个位</th>
+                                <th colspan="4">大小比走势</th>
+                                <th colspan="4">大数个数</th>
+                                <th colspan="4">小数个数</th>
+                                <th rowspan="2">开奖号</th>
+                            </tr>
+                            <tr class="header-sub">
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th>3:0</th><th>2:1</th><th>1:2</th><th>0:3</th>
+                                <th>0</th><th>1</th><th>2</th><th>3</th>
+                                <th>0</th><th>1</th><th>2</th><th>3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sizeTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 奇偶走势 -->
+            <div class="trend-panel" id="oddevenPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="panel-options">
+                    <span class="options-label">标注选择：</span>
+                    <label class="option-check"><input type="checkbox" checked><span>遗漏</span></label>
+                    <label class="option-check"><input type="checkbox" checked><span>折线</span></label>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table oddeven-table">
+                        <thead>
+                            <tr class="header-group">
+                                <th rowspan="2">期号</th>
+                                <th colspan="6">开奖号码分布</th>
+                                <th rowspan="2">百位</th>
+                                <th rowspan="2">十位</th>
+                                <th rowspan="2">个位</th>
+                                <th colspan="4">奇偶比走势</th>
+                                <th colspan="4">奇数个数</th>
+                                <th colspan="4">偶数个数</th>
+                                <th rowspan="2">开奖号</th>
+                            </tr>
+                            <tr class="header-sub">
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                <th>3:0</th><th>2:1</th><th>1:2</th><th>0:3</th>
+                                <th>0</th><th>1</th><th>2</th><th>3</th>
+                                <th>0</th><th>1</th><th>2</th><th>3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="oddevenTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 和值历史号码 -->
+            <div class="trend-panel" id="sumhistoryPanel">
+                <div class="panel-header">
+                    <div class="date-filter">
+                        <button class="date-btn active">最近60期</button>
+                        <button class="date-btn">今天</button>
+                    </div>
+                </div>
+                <div class="panel-options">
+                    <span class="options-label">标注选择：</span>
+                    <label class="option-check"><input type="checkbox" checked><span>遗漏</span></label>
+                    <label class="option-check"><input type="checkbox" checked><span>折线</span></label>
+                </div>
+                <div class="table-scroll">
+                    <table class="pc-table sumhistory-table">
+                        <thead>
+                            <tr class="header-group">
+                                <th rowspan="2">期号</th>
+                                <th colspan="17">和值走势</th>
+                                <th colspan="4">和值形态</th>
+                                <th rowspan="2">开奖号</th>
+                            </tr>
+                            <tr class="header-sub">
+                                <th>和</th>
+                                <th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th>
+                                <th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+                                <th>15</th><th>16</th><th>17</th><th>18</th>
+                                <th class="red">大</th><th class="blue">小</th><th class="orange">单</th><th class="purple">双</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sumhistoryTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 玩法说明 -->
+            <div class="trend-panel" id="rulesPanel">
+                <div class="rules-content">
+                    <h3 class="rules-main-title">快三玩法说明</h3>
+                    
+                    <div class="rules-block">
+                        <h4>游戏简介</h4>
+                        <p>快三的玩法类似于传统的快三，玩家需要在1~6之间选择一个或多个数字，然后等待开奖结果。开奖结果是由三个骰子随机生成的。如果骰子点数与玩家选择的数字匹配，玩家将获得相应的奖金。</p>
+                    </div>
+
+                    <div class="rules-block">
+                        <h4>大小单双</h4>
+                        <table class="rules-table">
+                            <thead><tr><th>项目</th><th>赔率</th><th>说明</th></tr></thead>
+                            <tbody>
+                                <tr><td>大</td><td>1.96</td><td>点数总和11~17点</td></tr>
+                                <tr><td>小</td><td>1.96</td><td>点数总和4~10点</td></tr>
+                                <tr><td>单</td><td>1.96</td><td>点数总和为单数</td></tr>
+                                <tr><td>双</td><td>1.96</td><td>点数总和为双数</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="rules-block">
+                        <h4>总和赔率</h4>
+                        <table class="rules-table">
+                            <thead><tr><th>项目</th><th>赔率</th><th>说明</th></tr></thead>
+                            <tbody>
+                                <tr><td>4、17</td><td>63</td><td>点数总和为4或17</td></tr>
+                                <tr><td>5、16</td><td>31.5</td><td>点数总和为5或16</td></tr>
+                                <tr><td>6、15</td><td>19</td><td>点数总和为6或15</td></tr>
+                                <tr><td>7、14</td><td>12.6</td><td>点数总和为7或14</td></tr>
+                                <tr><td>8、13</td><td>9</td><td>点数总和为8或13</td></tr>
+                                <tr><td>9、12</td><td>7.5</td><td>点数总和为9或12</td></tr>
+                                <tr><td>10、11</td><td>7</td><td>点数总和为10或11</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="rules-block">
+                        <h4>特殊玩法</h4>
+                        <table class="rules-table">
+                            <thead><tr><th>项目</th><th>赔率</th><th>说明</th></tr></thead>
+                            <tbody>
+                                <tr><td>单骰(1-6)</td><td>1.96</td><td>其中1颗骰子摇到押注数字</td></tr>
+                                <tr><td>对子</td><td>9.81</td><td>其中2颗骰子摇到押注数字</td></tr>
+                                <tr><td>围骰</td><td>169</td><td>三颗骰子都是同一数字</td></tr>
+                                <tr><td>豹子</td><td>28.16</td><td>三颗骰子数字相同</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 走势说明浮动按钮 -->
+    <button class="trend-guide-fab" id="trendGuideFab" onclick="openTrendGuide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>看图指南</span>
+    </button>
+
+    <!-- 走势说明弹窗 -->
+    <div class="trend-guide-overlay" id="trendGuideOverlay">
+        <div class="guide-mask" onclick="closeTrendGuide()"></div>
+        <div class="guide-sheet">
+            <div class="guide-handle"></div>
+            <div class="guide-header">
+                <div class="guide-header-left">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <h3 id="guideTitle">走势图看图指南</h3>
+                </div>
+                <button class="guide-close" onclick="closeTrendGuide()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- 分类tab -->
+            <div class="guide-tabs" id="guideTabs">
+                <button class="guide-tab active" data-guide="history" onclick="switchGuideTab(this)">开奖记录</button>
+                <button class="guide-tab" data-guide="analysis" onclick="switchGuideTab(this)">综合分析</button>
+                <button class="guide-tab" data-guide="position" onclick="switchGuideTab(this)">定位走势</button>
+                <button class="guide-tab" data-guide="numbeads" onclick="switchGuideTab(this)">号码路珠</button>
+                <button class="guide-tab" data-guide="basic" onclick="switchGuideTab(this)">基本走势</button>
+                <button class="guide-tab" data-guide="dragon" onclick="switchGuideTab(this)">长龙统计</button>
+                <button class="guide-tab" data-guide="size" onclick="switchGuideTab(this)">大小/奇偶</button>
+            </div>
+            <!-- 说明内容 -->
+            <div class="guide-body" id="guideBody">
+                <!-- 开奖记录 -->
+                <div class="guide-section active" data-guide="history">
+                    <div class="guide-card">
+                        <div class="guide-card-title">📋 什么是开奖记录？</div>
+                        <div class="guide-card-text">开奖记录按时间倒序展示历史各期的开奖号码，是最基础的数据查看方式。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span>期号：每期的唯一编号</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span>开奖号码：当期开出的号码</div>
+                                <div class="legend-item"><span class="legend-dot green"></span>时间：开奖的具体时间</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2v4m0 12v4m-6-10H2m20 0h-4m-1.343-5.657l-2.828 2.828M7.172 16.828l-2.828 2.828M16.828 16.828l2.828 2.828M7.172 7.172L4.344 4.344"/></svg>
+                        <span>切换顶部的「最近60期/今天/昨天」可筛选不同时间范围的数据</span>
+                    </div>
+                </div>
+
+                <!-- 综合分析 -->
+                <div class="guide-section" data-guide="analysis">
+                    <div class="guide-card">
+                        <div class="guide-card-title">📊 什么是综合分析？</div>
+                        <div class="guide-card-text">综合分析将开奖数据以统计图表形式呈现，快速看出号码的整体分布特征。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>出现次数</strong>：各号码在选定周期内开出的总次数</div>
+                                <div class="legend-item"><span class="legend-dot orange"></span><strong>最大遗漏</strong>：号码最多连续多少期没有出现</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>当前遗漏</strong>：号码到当前为止已连续多少期未出现</div>
+                                <div class="legend-item"><span class="legend-dot green"></span><strong>平均遗漏</strong>：号码出现间隔的平均期数</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>遗漏值越大，说明该号码越久没出现，但不代表下期一定会出</span>
+                    </div>
+                </div>
+
+                <!-- 定位走势 -->
+                <div class="guide-section" data-guide="position">
+                    <div class="guide-card">
+                        <div class="guide-card-title">📍 什么是定位走势？</div>
+                        <div class="guide-card-text">定位走势按位置（第一位、第二位、第三位）分别展示号码的历史出现趋势，帮助分析每个位置的号码规律。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-circle red">5</span>红色圆圈数字 = 当期在该位置开出的号码</div>
+                                <div class="legend-item"><span class="legend-num gray">3</span>灰色数字 = 该位置未开出的号码</div>
+                                <div class="legend-item"><span class="legend-line blue"></span>蓝色连线 = 号码出现的走势轨迹</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>关注连线走势，如果连线呈斜线或折线，可辅助判断号码走向趋势</span>
+                    </div>
+                </div>
+
+                <!-- 号码路珠 -->
+                <div class="guide-section" data-guide="numbeads">
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔴 什么是号码路珠？</div>
+                        <div class="guide-card-text">路珠是一种紧凑的历史号码展示方式，用彩色珠子来记录每期开出的号码，可以直观地看出号码的冷热分布。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-bead red">1</span>每个珠子代表一期的号码</div>
+                                <div class="legend-item"><span class="legend-bead blue">4</span>不同颜色对应不同号码</div>
+                                <div class="legend-item"><span class="legend-dot green"></span>从左往右、从上往下按时间顺序排列</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>如果某个颜色/数字连续出现多次，说明该号码处于热号状态</span>
+                    </div>
+                </div>
+
+                <!-- 基本走势 -->
+                <div class="guide-section" data-guide="basic">
+                    <div class="guide-card">
+                        <div class="guide-card-title">📈 什么是基本走势？</div>
+                        <div class="guide-card-text">基本走势是最常用的走势图，将所有号码以表格和折线图的形式展示，可全面分析号码的分布、遗漏和走向。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-circle red">6</span>红色高亮 = 当期开出的号码</div>
+                                <div class="legend-item"><span class="legend-num gray">2</span>灰色数字 = 当期未开出（数字本身代表遗漏值）</div>
+                                <div class="legend-item"><span class="legend-line blue"></span>连线 = 追踪号码的连续出现轨迹</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">📐 底部统计行</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>出现次数</strong>：该号码一共出现了多少次</div>
+                                <div class="legend-item"><span class="legend-dot orange"></span><strong>最大遗漏</strong>：最长连续多少期没出</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>平均遗漏</strong>：平均多少期出现一次</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>横向看单期开奖号码分布，纵向看单个号码历史走势</span>
+                    </div>
+                </div>
+
+                <!-- 长龙统计 -->
+                <div class="guide-section" data-guide="dragon">
+                    <div class="guide-card">
+                        <div class="guide-card-title">🐉 什么是长龙统计？</div>
+                        <div class="guide-card-text">长龙是指同一形态（如大、小、单、双等）连续多期出现的现象。长龙统计帮助您快速发现当前正在延续的连续形态。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>连续期数</strong>：该形态已连续出现的期数，越多越值得关注</div>
+                                <div class="legend-item"><span class="legend-dot orange"></span><strong>形态类型</strong>：大/小、单/双等不同的统计维度</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>长龙仅是历史统计现象，不保证趋势延续，请理性参考</span>
+                    </div>
+                </div>
+
+                <!-- 大小/奇偶走势 -->
+                <div class="guide-section" data-guide="size">
+                    <div class="guide-card">
+                        <div class="guide-card-title">⚖️ 什么是大小/奇偶走势？</div>
+                        <div class="guide-card-text">将每期号码按大小（大/小）或奇偶（奇/偶）分类后绘制走势图，用于分析号码形态的分布趋势。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-tag red">大</span><span class="legend-tag blue">小</span>大小走势：总和 ≥ 11 为大，≤ 10 为小</div>
+                                <div class="legend-item"><span class="legend-tag orange">奇</span><span class="legend-tag green">偶</span>奇偶走势：总和为奇数/偶数</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span>观察连续出现同一形态（长龙）或交替出现（单跳）</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>结合基本走势一起分析，效果更好</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部提示 -->
+            <div class="guide-footer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>所有走势数据仅供参考，不构成任何投注建议</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="tab-bar">
+        <a href="index.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.5V19a2 2 0 002 2h10a2 2 0 002-2v-6.5"/>
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M14 21v-4a2 2 0 00-4 0v4"/>
+                </svg>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="trend.html" class="tab-bar-item active">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 16 12 12 8 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <span>走势</span>
+        </a>
+        <a href="roadmap.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+            </div>
+            <span>路子图</span>
+        </a>
+        <a href="me.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21a7 7 0 0114 0"/>
+                </svg>
+            </div>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script src="trend.js"></script>
+</body>
+</html>

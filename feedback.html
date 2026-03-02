@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>意见反馈 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body class="feedback-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="header-title">意见反馈</h1>
+        <div class="header-right">
+            <button class="history-btn" onclick="toggleHistory()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- 反馈表单 -->
+    <div class="fb-content" id="fbFormView">
+        <!-- 反馈类型 -->
+        <div class="fb-section">
+            <div class="fb-label">反馈类型</div>
+            <div class="fb-types" id="fbTypes">
+                <div class="fb-type active" data-type="bug" onclick="selectType(this)">
+                    <div class="fb-type-icon bug">🐛</div>
+                    <div class="fb-type-name">功能异常</div>
+                    <div class="fb-type-desc">Bug/闪退/报错</div>
+                    <div class="fb-type-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+                <div class="fb-type" data-type="suggest" onclick="selectType(this)">
+                    <div class="fb-type-icon suggest">💡</div>
+                    <div class="fb-type-name">功能建议</div>
+                    <div class="fb-type-desc">新功能/改进</div>
+                    <div class="fb-type-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+                <div class="fb-type" data-type="ui" onclick="selectType(this)">
+                    <div class="fb-type-icon ui">🎨</div>
+                    <div class="fb-type-name">界面优化</div>
+                    <div class="fb-type-desc">UI/交互体验</div>
+                    <div class="fb-type-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+                <div class="fb-type" data-type="data" onclick="selectType(this)">
+                    <div class="fb-type-icon data">📊</div>
+                    <div class="fb-type-name">数据问题</div>
+                    <div class="fb-type-desc">数据错误/缺失</div>
+                    <div class="fb-type-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+                <div class="fb-type" data-type="other" onclick="selectType(this)">
+                    <div class="fb-type-icon other">📝</div>
+                    <div class="fb-type-name">其他反馈</div>
+                    <div class="fb-type-desc">其他问题</div>
+                    <div class="fb-type-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问题描述 -->
+        <div class="fb-section">
+            <div class="fb-label">
+                问题描述
+                <span class="fb-required">*必填</span>
+            </div>
+            <div class="fb-textarea-wrap">
+                <textarea class="fb-textarea" id="fbContent" placeholder="请详细描述您遇到的问题或建议，以便我们更好地改进..." maxlength="500" oninput="updateCharCount()"></textarea>
+                <div class="fb-char-count"><span id="charCount">0</span>/500</div>
+            </div>
+        </div>
+
+        <!-- 截图上传 -->
+        <div class="fb-section">
+            <div class="fb-label">截图上传 <span class="fb-optional">（可选，最多3张）</span></div>
+            <div class="fb-images" id="fbImages">
+                <div class="fb-image-add" onclick="addImage()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    <span>添加图片</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="fb-submit-wrap">
+            <button class="fb-submit-btn" id="fbSubmitBtn" onclick="submitFeedback()">
+                提交反馈
+            </button>
+            <div class="fb-submit-tip">我们将在1-3个工作日内处理您的反馈</div>
+        </div>
+    </div>
+
+    <!-- 反馈历史 -->
+    <div class="fb-history" id="fbHistoryView" style="display:none;">
+        <div class="fb-history-list" id="fbHistoryList"></div>
+        <div class="fb-empty" id="fbEmptyState" style="display:none;">
+            <div class="fb-empty-icon">📭</div>
+            <div class="fb-empty-text">暂无反馈记录</div>
+            <div class="fb-empty-tip">提交的反馈将会显示在这里</div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="fb-toast" id="fbToast"></div>
+
+    <!-- 图片预览 -->
+    <div class="fb-preview-overlay" id="previewOverlay" onclick="closePreview()">
+        <img class="fb-preview-img" id="previewImg" src="" alt="preview">
+    </div>
+
+    <script src="feedback.js"></script>
+</body>
+</html>

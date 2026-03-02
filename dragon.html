@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>长龙排行 - 彩票H5</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dragon.css">
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="header">
+        <a href="index.html" class="header-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </a>
+        <h1 class="header-title">长龙排行</h1>
+        <button class="header-filter" id="filterBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18M7 12h10M10 18h4"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 页面内容 -->
+    <div class="dragon-page">
+        <!-- 连出期数筛选 -->
+        <div class="period-filter">
+            <span class="filter-label">连出期数</span>
+            <div class="period-tabs">
+                <button class="period-tab active" data-value="2">2</button>
+                <button class="period-tab" data-value="3">3</button>
+                <button class="period-tab" data-value="4">4</button>
+                <button class="period-tab" data-value="5">5</button>
+                <button class="period-tab" data-value="6">6+</button>
+            </div>
+        </div>
+
+        <!-- 长龙列表 -->
+        <div class="dragon-list" id="dragonList">
+            <!-- 动态生成 -->
+        </div>
+    </div>
+
+    <!-- 彩种筛选弹窗 -->
+    <div class="filter-modal" id="filterModal">
+        <div class="filter-overlay"></div>
+        <div class="filter-panel">
+            <div class="filter-header">
+                <h3>彩种选择</h3>
+                <div class="filter-actions">
+                    <button class="action-btn-text" id="selectAll">全选</button>
+                    <button class="action-btn-text" id="clearAll">清空</button>
+                </div>
+            </div>
+            <div class="filter-content">
+                <div class="lottery-group">
+                    <div class="group-title">东方彩票</div>
+                    <div class="group-items">
+                        <label class="lottery-check"><input type="checkbox" value="快三" checked><span>快三</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="鱼虾蟹" checked><span>鱼虾蟹</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="赛车" checked><span>赛车</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="六合彩" checked><span>六合彩</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="时时彩" checked><span>时时彩</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="PC28" checked><span>PC28</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="百人牛牛" checked><span>百人牛牛</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="龙虎" checked><span>龙虎</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="三公" checked><span>三公</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="百家乐" checked><span>百家乐</span></label>
+                    </div>
+                </div>
+                <div class="lottery-group">
+                    <div class="group-title">PK系列</div>
+                    <div class="group-items">
+                        <label class="lottery-check"><input type="checkbox" value="极速赛车" checked><span>极速赛车</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="幸运飞艇" checked><span>幸运飞艇</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="SG飞艇" checked><span>SG飞艇</span></label>
+                    </div>
+                </div>
+                <div class="lottery-group">
+                    <div class="group-title">快三系列</div>
+                    <div class="group-items">
+                        <label class="lottery-check"><input type="checkbox" value="极速快3" checked><span>极速快3</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="SG快3" checked><span>SG快3</span></label>
+                    </div>
+                </div>
+                <div class="lottery-group">
+                    <div class="group-title">时时彩系列</div>
+                    <div class="group-items">
+                        <label class="lottery-check"><input type="checkbox" value="幸运时时彩" checked><span>幸运时时彩</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="澳洲幸运5" checked><span>澳洲幸运5</span></label>
+                        <label class="lottery-check"><input type="checkbox" value="澳洲幸运10" checked><span>澳洲幸运10</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="confirm-btn" id="confirmFilter">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部Tab导航 -->
+    <nav class="tab-bar">
+        <a href="index.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.5V19a2 2 0 002 2h10a2 2 0 002-2v-6.5"/>
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M14 21v-4a2 2 0 00-4 0v4"/>
+                </svg>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="trend.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 16 12 12 8 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <span>走势</span>
+        </a>
+        <a href="roadmap.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+            </div>
+            <span>路子图</span>
+        </a>
+        <a href="me.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21a7 7 0 0114 0"/>
+                </svg>
+            </div>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script src="dragon.js"></script>
+</body>
+</html>

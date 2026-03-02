@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>消息中心 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="message.css">
+</head>
+<body class="message-page">
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="header-title">消息中心</h1>
+        <button class="header-action" id="clearAllBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Filter tabs -->
+    <div class="msg-tabs">
+        <button class="msg-tab active" data-type="all">全部</button>
+        <button class="msg-tab" data-type="draw">开奖提醒</button>
+        <button class="msg-tab" data-type="dragon">长龙提醒</button>
+        <button class="msg-tab" data-type="goodroad">好路提醒</button>
+        <button class="msg-tab" data-type="result">开奖结果</button>
+    </div>
+
+    <!-- Messages list -->
+    <div class="msg-list" id="msgList">
+        <!-- JS generates -->
+    </div>
+
+    <!-- Empty state -->
+    <div class="msg-empty" id="msgEmpty" style="display:none">
+        <div class="msg-empty-icon">🔔</div>
+        <p class="msg-empty-title">暂无消息</p>
+        <p class="msg-empty-desc">开启智能提醒后，相关推送将在这里显示</p>
+        <a href="reminder.html" class="msg-empty-btn">去设置提醒</a>
+    </div>
+
+    <script src="message.js"></script>
+</body>
+</html>

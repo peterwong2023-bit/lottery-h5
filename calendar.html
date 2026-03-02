@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>开奖日历 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="calendar.css">
+</head>
+<body class="calendar-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="header-title">开奖日历</h1>
+        <button class="today-btn" id="todayBtn" onclick="goToday()">今天</button>
+    </header>
+
+    <!-- 提示条 -->
+    <div class="cal-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>仅展示低频彩种开奖安排，高频彩种请前往对应彩种页面查看</span>
+    </div>
+
+    <!-- 日历区域 -->
+    <div class="cal-container">
+        <!-- 月份选择器 -->
+        <div class="month-selector">
+            <button class="month-arrow" onclick="prevMonth()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="month-title" id="monthTitle">2026年3月</div>
+            <button class="month-arrow" onclick="nextMonth()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 星期标题 -->
+        <div class="week-header">
+            <div class="week-day sun">日</div>
+            <div class="week-day">一</div>
+            <div class="week-day">二</div>
+            <div class="week-day">三</div>
+            <div class="week-day">四</div>
+            <div class="week-day">五</div>
+            <div class="week-day sat">六</div>
+        </div>
+
+        <!-- 日期网格 -->
+        <div class="dates-grid" id="datesGrid"></div>
+
+        <!-- 图例 -->
+        <div class="cal-legend">
+            <div class="legend-item">
+                <span class="legend-dot many"></span>
+                <span>≥6场</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot some"></span>
+                <span>3~5场</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot few"></span>
+                <span>1~2场</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选中日期详情 -->
+    <div class="day-detail" id="dayDetail">
+        <div class="detail-header">
+            <div class="detail-date" id="detailDate">3月1日 星期六</div>
+            <div class="detail-count" id="detailCount">共 6 场开奖</div>
+        </div>
+
+        <!-- 开奖时间轴 -->
+        <div class="draw-timeline" id="drawTimeline"></div>
+    </div>
+
+    <script src="calendar.js"></script>
+</body>
+</html>

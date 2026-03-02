@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>路子图 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="roadmap.css">
+    <link rel="stylesheet" href="notification.css">
+</head>
+<body class="roadmap-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <!-- 彩种选择按钮 -->
+        <button class="lottery-picker" id="lotteryPicker">
+            <span class="picker-icon">🎲</span>
+            <span class="picker-name" id="currentLotteryName">快三</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <button class="refresh-btn" id="refreshBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 彩种选择弹窗 -->
+    <div class="lottery-modal" id="lotteryModal">
+        <div class="modal-mask"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>选择彩种</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 东方彩票 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        东方彩票
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option active" data-lottery="kuaisan" data-icon="🎲">快三</button>
+                        <button class="lottery-option" data-lottery="yuxiaxie" data-icon="🦐">鱼虾蟹</button>
+                        <button class="lottery-option" data-lottery="saiche" data-icon="🏎️">赛车</button>
+                        <button class="lottery-option" data-lottery="liuhecai" data-icon="🎱">六合彩</button>
+                        <button class="lottery-option" data-lottery="shishicai" data-icon="⏱️">时时彩</button>
+                        <button class="lottery-option" data-lottery="niuniu" data-icon="🐂">百人牛牛</button>
+                        <button class="lottery-option" data-lottery="longhu" data-icon="🐉">龙虎</button>
+                        <button class="lottery-option" data-lottery="sangong" data-icon="🃏">三公</button>
+                        <button class="lottery-option" data-lottery="baijiale" data-icon="♠️">百家乐</button>
+                        <button class="lottery-option" data-lottery="lunpan" data-icon="🎡">轮盘</button>
+                    </div>
+                </div>
+                <!-- 快三 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                        快三
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="jsk3" data-icon="🎲">江苏快三</button>
+                        <button class="lottery-option" data-lottery="ahk3" data-icon="🎲">安徽快三</button>
+                        <button class="lottery-option" data-lottery="hbk3" data-icon="🎲">湖北快三</button>
+                    </div>
+                </div>
+                <!-- 时时彩系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        时时彩系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="cqssc" data-icon="⏱️">重庆时时彩</button>
+                        <button class="lottery-option" data-lottery="xjssc" data-icon="⏱️">新疆时时彩</button>
+                        <button class="lottery-option" data-lottery="tjssc" data-icon="⏱️">天津时时彩</button>
+                    </div>
+                </div>
+                <!-- PK系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
+                        PK系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="pk10" data-icon="🏎️">北京PK10</button>
+                        <button class="lottery-option" data-lottery="xyft" data-icon="✈️">幸运飞艇</button>
+                    </div>
+                </div>
+                <!-- PC28 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        PC28
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="jndpc28" data-icon="🔢">加拿大PC28</button>
+                        <button class="lottery-option" data-lottery="bjpc28" data-icon="🔢">北京PC28</button>
+                    </div>
+                </div>
+                <!-- 11选5系列 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        11选5系列
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="gd11x5" data-icon="🎯">广东11选5</button>
+                        <button class="lottery-option" data-lottery="sh11x5" data-icon="🎯">上海11选5</button>
+                    </div>
+                </div>
+                <!-- 乐透彩 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        乐透彩
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="ssq" data-icon="🎱">双色球</button>
+                        <button class="lottery-option" data-lottery="dlt" data-icon="🎱">大乐透</button>
+                    </div>
+                </div>
+                <!-- 快乐十分 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        快乐十分
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="gdklsf" data-icon="😄">广东快乐十分</button>
+                        <button class="lottery-option" data-lottery="tjklsf" data-icon="😄">天津快乐十分</button>
+                    </div>
+                </div>
+                <!-- 其他 -->
+                <div class="lottery-group">
+                    <div class="group-title">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                        其他
+                    </div>
+                    <div class="group-items">
+                        <button class="lottery-option" data-lottery="kl8" data-icon="🔢">快乐8</button>
+                        <button class="lottery-option" data-lottery="3d" data-icon="🎰">福彩3D</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 当前开奖信息 -->
+        <div class="current-result-bar">
+            <div class="result-info">
+                <span class="period">第 <strong id="currentPeriod">0350</strong> 期</span>
+                <div class="dice-row">
+                    <div class="mini-dice" id="dice1">4</div>
+                    <div class="mini-dice" id="dice2">2</div>
+                    <div class="mini-dice" id="dice3">3</div>
+                    <span class="sum-text" id="sumText">= 9</span>
+                    <span class="attr small" id="sizeAttr">小</span>
+                    <span class="attr odd" id="oddEvenAttr">单</span>
+                </div>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-time" id="countdown">00:45</span>
+                <span class="countdown-label">后开奖</span>
+            </div>
+        </div>
+
+        <!-- 筛选条件 - 参照PC版 -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label">位置:</span>
+                <label class="filter-check"><input type="checkbox" checked> 总和</label>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">属性:</span>
+                <label class="filter-check"><input type="checkbox" id="filterSize" checked> 大小</label>
+                <label class="filter-check"><input type="checkbox" id="filterOddEven" checked> 单双</label>
+            </div>
+        </div>
+
+        <!-- 路子图类型切换 -->
+        <div class="road-type-tabs">
+            <button class="road-tab active" data-type="size">
+                <span class="tab-icon">📊</span>
+                <span>大小路</span>
+            </button>
+            <button class="road-tab" data-type="oddeven">
+                <span class="tab-icon">🎯</span>
+                <span>单双路</span>
+            </button>
+        </div>
+
+        <!-- 路子图内容 -->
+        <div class="road-content">
+            <!-- 大小路 -->
+            <div class="road-panel active" id="sizePanel">
+                <!-- 统计概览 -->
+                <div class="stats-overview">
+                    <div class="stat-item big">
+                        <span class="stat-label">大</span>
+                        <span class="stat-value" id="sizeBigCount">29</span>
+                        <span class="stat-percent" id="sizeBigPercent">49%</span>
+                    </div>
+                    <div class="stat-item small">
+                        <span class="stat-label">小</span>
+                        <span class="stat-value" id="sizeSmallCount">31</span>
+                        <span class="stat-percent" id="sizeSmallPercent">51%</span>
+                    </div>
+                    <div class="stat-item streak">
+                        <span class="stat-label">当前</span>
+                        <span class="streak-badge big" id="sizeStreakBadge">大3连</span>
+                    </div>
+                </div>
+
+                <!-- 珠盘路 -->
+                <div class="road-section">
+                    <div class="section-header">
+                        <h3>珠盘路</h3>
+                        <div class="legend">
+                            <span><span class="dot red"></span>大</span>
+                            <span><span class="dot blue"></span>小</span>
+                        </div>
+                    </div>
+                    <div class="bead-plate" id="sizeBeadPlate"></div>
+                </div>
+
+                <!-- 大路 -->
+                <div class="road-section">
+                    <div class="section-header">
+                        <h3>大路</h3>
+                        <span class="tip">← 左滑查看更多</span>
+                    </div>
+                    <div class="big-road-wrapper">
+                        <div class="big-road" id="sizeBigRoad"></div>
+                    </div>
+                </div>
+
+                <!-- 下三路 -->
+                <div class="road-section derived">
+                    <div class="section-header">
+                        <h3>下三路</h3>
+                        <div class="legend">
+                            <span><span class="dot red"></span>齐</span>
+                            <span><span class="dot blue"></span>不齐</span>
+                        </div>
+                    </div>
+                    <div class="derived-roads">
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>大眼仔路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="sizeBigEye"></div>
+                        </div>
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>小路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="sizeSmallRoad"></div>
+                        </div>
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>曱甴路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="sizeCockroach"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 统计信息栏 - 参照PC版 -->
+                <div class="stats-bar" id="sizeStatsBar">
+                    <div class="stats-item">
+                        <span class="stats-label">当前连续:</span>
+                        <span class="streak-tag red" id="sizeStreakTag">大 × 3</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">最长连续:</span>
+                        <span class="stats-value blue" id="sizeMaxStreak">小 × 8</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">大小比:</span>
+                        <span class="stats-value" id="sizeRatio">29:31</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 单双路 -->
+            <div class="road-panel" id="oddevenPanel">
+                <!-- 统计概览 -->
+                <div class="stats-overview">
+                    <div class="stat-item odd">
+                        <span class="stat-label">单</span>
+                        <span class="stat-value" id="oddCount">34</span>
+                        <span class="stat-percent" id="oddPercent">57%</span>
+                    </div>
+                    <div class="stat-item even">
+                        <span class="stat-label">双</span>
+                        <span class="stat-value" id="evenCount">26</span>
+                        <span class="stat-percent" id="evenPercent">43%</span>
+                    </div>
+                    <div class="stat-item streak">
+                        <span class="stat-label">当前</span>
+                        <span class="streak-badge even" id="oddEvenStreakBadge">双2连</span>
+                    </div>
+                </div>
+
+                <!-- 珠盘路 -->
+                <div class="road-section">
+                    <div class="section-header">
+                        <h3>珠盘路</h3>
+                        <div class="legend">
+                            <span><span class="dot purple"></span>单</span>
+                            <span><span class="dot green"></span>双</span>
+                        </div>
+                    </div>
+                    <div class="bead-plate" id="oddEvenBeadPlate"></div>
+                </div>
+
+                <!-- 大路 -->
+                <div class="road-section">
+                    <div class="section-header">
+                        <h3>大路</h3>
+                        <span class="tip">← 左滑查看更多</span>
+                    </div>
+                    <div class="big-road-wrapper">
+                        <div class="big-road" id="oddEvenBigRoad"></div>
+                    </div>
+                </div>
+
+                <!-- 下三路 -->
+                <div class="road-section derived">
+                    <div class="section-header">
+                        <h3>下三路</h3>
+                        <div class="legend">
+                            <span><span class="dot red"></span>齐</span>
+                            <span><span class="dot blue"></span>不齐</span>
+                        </div>
+                    </div>
+                    <div class="derived-roads">
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>大眼仔路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="oddEvenBigEye"></div>
+                        </div>
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>小路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="oddEvenSmallRoad"></div>
+                        </div>
+                        <div class="derived-road-item">
+                            <div class="derived-header">
+                                <span>曱甴路</span>
+                                <div class="sub-legend">
+                                    <span><span class="mini-dot red"></span>红</span>
+                                    <span><span class="mini-dot blue"></span>蓝</span>
+                                </div>
+                            </div>
+                            <div class="derived-grid" id="oddEvenCockroach"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 统计信息栏 -->
+                <div class="stats-bar" id="oddEvenStatsBar">
+                    <div class="stats-item">
+                        <span class="stats-label">当前连续:</span>
+                        <span class="streak-tag blue" id="oddEvenStreakTag">双 × 2</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">最长连续:</span>
+                        <span class="stats-value red" id="oddEvenMaxStreak">单 × 7</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">单双比:</span>
+                        <span class="stats-value" id="oddEvenRatio">34:26</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 看图指南浮动按钮 -->
+    <button class="road-guide-fab" onclick="openRoadGuide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>看图指南</span>
+    </button>
+
+    <!-- 路子图说明弹窗 -->
+    <div class="road-guide-overlay" id="roadGuideOverlay">
+        <div class="guide-mask" onclick="closeRoadGuide()"></div>
+        <div class="guide-sheet">
+            <div class="guide-handle"></div>
+            <div class="guide-header">
+                <div class="guide-header-left">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <h3>路子图看图指南</h3>
+                </div>
+                <button class="guide-close" onclick="closeRoadGuide()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- 分类tab -->
+            <div class="guide-tabs">
+                <button class="guide-tab active" data-guide="bead" onclick="switchRoadGuideTab(this)">珠盘路</button>
+                <button class="guide-tab" data-guide="bigroad" onclick="switchRoadGuideTab(this)">大路</button>
+                <button class="guide-tab" data-guide="derived" onclick="switchRoadGuideTab(this)">下三路</button>
+                <button class="guide-tab" data-guide="stats" onclick="switchRoadGuideTab(this)">统计数据</button>
+            </div>
+            <!-- 说明内容 -->
+            <div class="guide-body">
+                <!-- 珠盘路 -->
+                <div class="guide-section active" data-guide="bead">
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔮 什么是珠盘路？</div>
+                        <div class="guide-card-text">珠盘路是最直观的开奖记录展示方式，将每期结果用彩色圆珠逐一排列，可以一目了然地看到历史走势全貌。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>阅读方向</strong>：每列从上往下排列，满6个换到右边下一列</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>颜色含义</strong>：大小路中，红=大，蓝=小；单双路中，紫=单，绿=双</div>
+                                <div class="legend-item"><span class="legend-dot orange"></span><strong>金色圈</strong>：最新一期的开奖结果，带呼吸动画</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2v4m0 12v4m-6-10H2m20 0h-4"/></svg>
+                        <span>珠盘路相当于原始数据，大路和下三路都是基于珠盘路数据生成的</span>
+                    </div>
+                </div>
+
+                <!-- 大路 -->
+                <div class="guide-section" data-guide="bigroad">
+                    <div class="guide-card">
+                        <div class="guide-card-title">🛣️ 什么是大路？</div>
+                        <div class="guide-card-text">大路是路子图的核心。它将连续相同结果纵向排列成"列"，当结果变化时换到新的一列，从而直观展示出走势的"龙"和"路"。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔍 怎么看？</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>向下延伸</strong>：连续出现相同结果，圆点向下排列，形成一列</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>换列</strong>：当结果变化（大→小 或 小→大），换到右边新列的第一行</div>
+                                <div class="legend-item"><span class="legend-dot green"></span><strong>龙转弯</strong>：如果一列已经填满6行还在连续，则向右拐弯继续</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">📊 如何分析？</div>
+                        <div class="guide-card-text">
+                            · <strong>长列</strong>（长龙）= 某个结果连续出现多次，趋势强<br>
+                            · <strong>短列交替</strong>（单跳）= 大小交替出现，无明显趋势<br>
+                            · <strong>规律重复</strong> = 列长度出现重复模式（如2-2-3-2-2-3…）<br>
+                            · 可以左滑查看更早的历史走势
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2v4m0 12v4m-6-10H2m20 0h-4"/></svg>
+                        <span>重点关注当前列的长度和最近几列的变化节奏</span>
+                    </div>
+                </div>
+
+                <!-- 下三路 -->
+                <div class="guide-section" data-guide="derived">
+                    <div class="guide-card">
+                        <div class="guide-card-title">🔬 什么是下三路？</div>
+                        <div class="guide-card-text">下三路是从大路中衍生出的三种分析图，用来判断大路的走势是否存在规律性重复。它包含：大眼仔路、小路和曱甴路。</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">🎨 颜色含义</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>红（齐）</strong>：当前走势与历史走势结构一致，规律在重复</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>蓝（不齐）</strong>：当前走势与历史走势结构不一致，规律被打破</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">📐 三条路的区别</div>
+                        <div class="guide-card-text">
+                            <table class="guide-table">
+                                <thead><tr><th>路型</th><th>比较距离</th><th>分析周期</th></tr></thead>
+                                <tbody>
+                                    <tr><td>大眼仔路</td><td>隔1列比较</td><td>短期规律</td></tr>
+                                    <tr><td>小路</td><td>隔2列比较</td><td>中期规律</td></tr>
+                                    <tr><td>曱甴路</td><td>隔3列比较</td><td>长期规律</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">📊 判定规则</div>
+                        <div class="guide-card-text">
+                            <strong>新列开始时：</strong><br>
+                            比较前一列的长度和参照列的长度。相等 → 红（齐），不等 → 蓝（不齐）<br><br>
+                            <strong>列内延续时：</strong><br>
+                            检查参照列在同一深度是否有数据。有 → 红（齐），无 → 蓝（不齐）
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">💡 实战应用</div>
+                        <div class="guide-card-text">
+                            · <strong>红多</strong> → 大路走势比较规律、稳定，适合"跟路"<br>
+                            · <strong>蓝多</strong> → 大路走势变化大、无规律，适合"反路"<br>
+                            · <strong>红蓝交替</strong> → 走势震荡，建议观望<br>
+                            · 三条路结论一致时，信号最强
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2v4m0 12v4m-6-10H2m20 0h-4"/></svg>
+                        <span>三条路互相验证：如果三条路都出红，说明走势非常规律</span>
+                    </div>
+                </div>
+
+                <!-- 统计数据 -->
+                <div class="guide-section" data-guide="stats">
+                    <div class="guide-card">
+                        <div class="guide-card-title">📈 统计概览</div>
+                        <div class="guide-card-text">页面顶部的统计卡片展示了当前数据的整体分布情况：<br><br>
+                            · <strong>大/小（单/双）数量</strong>：各出现了多少次<br>
+                            · <strong>占比</strong>：各自出现的百分比<br>
+                            · <strong>当前连续</strong>：最新的连续相同结果次数
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">📊 底部统计栏</div>
+                        <div class="guide-card-text">
+                            <div class="guide-legend">
+                                <div class="legend-item"><span class="legend-dot red"></span><strong>当前连续</strong>：当前正在持续的连续结果（如"大 × 3"表示已连续3次大）</div>
+                                <div class="legend-item"><span class="legend-dot blue"></span><strong>最长连续</strong>：历史上最长的连续记录</div>
+                                <div class="legend-item"><span class="legend-dot green"></span><strong>大小比/单双比</strong>：两种结果的出现次数比值</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-tip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2v4m0 12v4m-6-10H2m20 0h-4"/></svg>
+                        <span>当"当前连续"接近"最长连续"时，可能意味着即将反转</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="tab-bar">
+        <a href="index.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.5V19a2 2 0 002 2h10a2 2 0 002-2v-6.5"/>
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M14 21v-4a2 2 0 00-4 0v4"/>
+                </svg>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="trend.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 16 12 12 8 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <span>走势</span>
+        </a>
+        <a href="roadmap.html" class="tab-bar-item active">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+            </div>
+            <span>路子图</span>
+        </a>
+        <a href="me.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21a7 7 0 0114 0"/>
+                </svg>
+            </div>
+            <span>我的</span>
+        </a>
+    </nav>
+    
+    <script src="notification.js"></script>
+    <script src="roadmap.js"></script>
+</body>
+</html>

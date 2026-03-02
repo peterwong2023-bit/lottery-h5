@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>帮助中心 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="help.css">
+</head>
+<body class="help-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="header-title">帮助中心</h1>
+        <div style="width:40px"></div>
+    </header>
+
+    <!-- 搜索框 -->
+    <div class="help-search">
+        <div class="help-search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="搜索问题关键词..." oninput="filterQuestions()">
+            <button class="search-clear" id="searchClear" onclick="clearSearch()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="help-content">
+
+        <!-- 快捷入口 -->
+        <div class="help-quick">
+            <div class="quick-item" onclick="scrollToCategory('lottery')">
+                <div class="quick-icon orange">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <span>开奖相关</span>
+            </div>
+            <div class="quick-item" onclick="scrollToCategory('trend')">
+                <div class="quick-icon blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 16 12 12 8 2 17"/>
+                        <polyline points="16 7 22 7 22 13"/>
+                    </svg>
+                </div>
+                <span>走势图</span>
+            </div>
+            <div class="quick-item" onclick="scrollToCategory('roadmap')">
+                <div class="quick-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="3"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="3" y1="15" x2="21" y2="15"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                        <line x1="15" y1="3" x2="15" y2="21"/>
+                    </svg>
+                </div>
+                <span>路子图</span>
+            </div>
+            <div class="quick-item" onclick="scrollToCategory('account')">
+                <div class="quick-icon purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21a7 7 0 0114 0"/>
+                    </svg>
+                </div>
+                <span>账号相关</span>
+            </div>
+        </div>
+
+        <!-- 搜索结果为空 -->
+        <div class="help-empty" id="helpEmpty" style="display:none">
+            <div class="empty-icon">
+                <svg viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="28" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="4 4"/>
+                    <circle cx="28" cy="28" r="12" stroke="#d1d5db" stroke-width="2"/>
+                    <line x1="37" y1="37" x2="46" y2="46" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <p>未找到相关问题</p>
+            <span>换个关键词试试，或直接联系客服</span>
+        </div>
+
+        <!-- FAQ分类列表 -->
+        <div class="faq-list" id="faqList">
+
+            <!-- 开奖相关 -->
+            <div class="faq-category" id="cat-lottery" data-category="lottery">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <span>开奖相关</span>
+                </div>
+
+                <div class="faq-item" data-keywords="更新 数据 多久 频率 刷新">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>开奖数据多久更新一次？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>我们的开奖数据采用实时采集技术，通常在官方开奖后 <strong>10~30秒</strong> 内自动更新。您也可以在设置中开启「开奖自动刷新」功能，无需手动刷新即可查看最新结果。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="没有数据 暂无 空白 加载不出">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>为什么某些彩种暂时没有数据？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>可能原因：<br>1. 该彩种当日已停售或休市<br>2. 数据源临时维护中<br>3. 网络连接不稳定<br><br>建议您稍后刷新页面重试，或检查网络连接。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="准确 准不准 以什么为准 官方">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>开奖结果以什么为准？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>本平台所有开奖数据均来自各彩种官方渠道，仅供参考查询使用。最终开奖结果请以各彩种<strong>官方公告</strong>为准。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="提醒 通知 推送 开奖前">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何开启智能提醒？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>进入「我的」→「智能提醒」页面，包含三大功能：<br><br><strong>🔔 开奖提醒</strong>（低频彩）<br>• 适用于双色球、大乐透、六合彩等每日/每周开奖的彩种<br>• 可设置提前提醒时间和提醒方式<br><br><strong>🐉 长龙提醒</strong>（高频彩）<br>• 当大小/单双连开达到设定阈值时自动提醒<br>• 适用于快三、赛车、极速系列等高频彩种<br><br><strong>🛤️ 好路提醒</strong>（高频彩）<br>• 检测到好路模式（长龙/单跳/不过三等）时自动提醒<br>• 可自由选择监控的路型和彩种</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 走势图相关 -->
+            <div class="faq-category" id="cat-trend" data-category="trend">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 7 16 12 12 8 2 17"/>
+                            <polyline points="16 7 22 7 22 13"/>
+                        </svg>
+                    </div>
+                    <span>走势图相关</span>
+                </div>
+
+                <div class="faq-item" data-keywords="走势图 怎么看 如何看 使用">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>走势图怎么看？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>走势图以表格形式展示历史开奖号码的分布规律：<br><br>• <strong>红色数字</strong>：当期开出的号码<br>• <strong>灰色数字</strong>：未开出的号码<br>• <strong>蓝色连线</strong>：追踪号码出现的轨迹<br><br>您可以通过顶部切换不同的走势类型（基本走势、大小走势、奇偶走势等）来分析规律。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="遗漏 遗漏值 是什么意思 多少期没出">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>遗漏值是什么意思？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>遗漏值表示某个号码或形态<strong>连续多少期未出现</strong>。例如：<br><br>• 号码「5」遗漏值为 8，表示最近 8 期都没有开出号码 5<br>• 遗漏值越大，说明该号码越久没有出现<br><br>遗漏值仅作为参考数据，不代表下期一定会开出。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="冷热 冷号 热号 统计 频率">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>冷热号是怎么统计的？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>冷热号根据号码在一定期数内的<strong>出现频率</strong>来统计：<br><br>• 🔴 <strong>热号</strong>：近期出现频率较高的号码<br>• 🔵 <strong>冷号</strong>：近期出现频率较低的号码<br>• ⚪ <strong>温号</strong>：出现频率居中的号码<br><br>统计周期默认为最近 50 期，您可以在走势页面调整期数。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 路子图相关 -->
+            <div class="faq-category" id="cat-roadmap" data-category="roadmap">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="3"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="3" y1="15" x2="21" y2="15"/>
+                            <line x1="9" y1="3" x2="9" y2="21"/>
+                            <line x1="15" y1="3" x2="15" y2="21"/>
+                        </svg>
+                    </div>
+                    <span>路子图相关</span>
+                </div>
+
+                <div class="faq-item" data-keywords="大路 小路 大眼仔 珠盘路 什么是">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>什么是大路/小路/大眼仔？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>这些是百家乐中常用的路单记录方式：<br><br>• <strong>大路</strong>：最基础的路单，直接记录每局庄/闲的结果<br>• <strong>大眼仔</strong>：根据大路第二列起推导，反映路子的规律性<br>• <strong>小路</strong>：根据大路第三列起推导，更深层次的规律分析<br>• <strong>蟑螂路</strong>：根据大路第四列起推导<br>• <strong>珠盘路</strong>：以珠子形式逐格记录每局结果</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="颜色 红色 蓝色 绿色 代表">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>路子图的颜色代表什么？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>不同路图中颜色的含义：<br><br><strong>大路 / 珠盘路：</strong><br>• 🔴 红色 = 庄<br>• 🔵 蓝色 = 闲<br>• 🟢 绿色 = 和<br><br><strong>大眼仔 / 小路 / 蟑螂路：</strong><br>• 🔴 红色 = 有路（齐整/有规律）<br>• 🔵 蓝色 = 无路（不齐整/无规律）</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="好路 推荐 判断 依据 规律">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>好路推荐的判断依据是什么？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>好路推荐会自动分析当前路单中出现的特征形态：<br><br>• <strong>长龙</strong>：连续出现相同结果 4 次以上<br>• <strong>单跳</strong>：交替出现不同结果（如庄闲庄闲）<br>• <strong>双跳</strong>：两两交替（如庄庄闲闲庄庄）<br>• <strong>拍拍黐</strong>：连续对称的结果<br><br>系统会实时监控所有桌台数据，筛选出符合条件的好路供您参考。所有推荐仅供参考。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 杀号计划相关 -->
+            <div class="faq-category" id="cat-killplan" data-category="killplan">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon red">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span>杀号计划相关</span>
+                </div>
+
+                <div class="faq-item" data-keywords="命中率 怎么算 准确率 计算">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>专家命中率怎么计算的？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>命中率 = 预测正确的期数 ÷ 总预测期数 × 100%<br><br>例如：某专家近 100 期中，有 85 期预测正确，则命中率为 <strong>85%</strong>。<br><br>系统会展示专家的近期命中率和历史命中率，供您综合参考。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="杀号 是什么 怎么用 含义">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>杀号是什么意思？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>「杀号」是指预测某个号码在下一期<strong>不会出现</strong>。<br><br>例如：专家杀号「3」，即预测下一期不会开出号码 3。如果下期确实没有开出 3，则本次杀号正确（✓）；如果开出了 3，则杀号错误（✗）。<br><br>⚠️ 所有杀号计划仅供参考，不构成任何投注建议。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 账号相关 -->
+            <div class="faq-category" id="cat-account" data-category="account">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M5 21a7 7 0 0114 0"/>
+                        </svg>
+                    </div>
+                    <span>账号相关</span>
+                </div>
+
+                <div class="faq-item" data-keywords="注册 登录 手机号 验证码 新用户">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>怎么注册账号？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>本平台无需单独注册，使用<strong>手机号+短信验证码</strong>即可登录。首次登录会自动创建账号。<br><br>步骤：<br>1. 进入登录页面<br>2. 输入手机号<br>3. 获取并输入短信验证码<br>4. 点击「登录」即可</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="昵称 修改 改名 名字">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>怎么修改昵称？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>进入「我的」→「设置」→「修改昵称」，输入新昵称后点击保存即可。<br><br>昵称要求：<br>• 长度 2~12 个字符<br>• 支持中文、英文、数字</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="退出 登出 注销 删除账号">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何退出登录或注销账号？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>退出登录：</strong><br>进入「我的」→「设置」→ 页面底部点击「退出登录」。退出后需重新验证手机号登录。<br><br><strong>注销账号：</strong><br>进入「我的」→「设置」→「注销账号」。<br>⚠️ 注销后将清除所有个人数据（收藏、提醒、浏览记录等），且无法恢复。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="收藏 在哪里 查看 我的收藏">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>收藏的彩种在哪里查看？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>进入「我的」→「我的收藏」即可查看所有已收藏的彩种。<br><br>您也可以在首页顶部切换到「收藏」分类，快速查看收藏彩种的最新开奖结果。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他问题 -->
+            <div class="faq-category" id="cat-other" data-category="other">
+                <div class="faq-cat-header">
+                    <div class="faq-cat-icon gray">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <span>其他问题</span>
+                </div>
+
+                <div class="faq-item" data-keywords="加载 不出来 白屏 卡住 网络">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>数据加载不出来怎么办？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>请尝试以下方法：<br><br>1. 检查网络连接是否正常<br>2. 下拉刷新页面<br>3. 进入「我的」→「清除缓存」清理数据后重试<br>4. 关闭应用重新打开<br><br>如果问题持续存在，请通过「联络我们」反馈。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="建议 反馈 意见 bug 问题">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何提交意见反馈？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>进入「我的」→「意见反馈」，您可以：<br><br>1. 选择反馈类型（功能异常/优化建议/内容问题等）<br>2. 详细描述问题<br>3. 上传截图（可选，最多3张）<br>4. 提交后我们会尽快处理<br><br>您也可以通过「联络我们」的方式直接与我们取得联系。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="免费 收费 付费">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>使用本平台需要付费吗？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>本平台所有功能均<strong>完全免费</strong>使用，包括：<br><br>• 查看所有彩种的开奖数据<br>• 走势分析和路子图<br>• 杀号计划和专家推荐<br>• 智能提醒（开奖/长龙/好路）等个人服务<br><br>无需付费，无隐藏收费项目。</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 免责声明 -->
+        <div class="help-disclaimer">
+            <div class="disclaimer-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                免责声明
+            </div>
+            <p>本平台仅提供彩票开奖信息查询和数据分析服务，所有数据仅供参考。本平台不提供任何投注、售彩服务，不对用户的投注行为承担任何责任。</p>
+        </div>
+
+        <!-- 底部联系客服 -->
+        <div class="help-contact">
+            <p>没找到您的问题？</p>
+            <a href="javascript:void(0)" onclick="goContact()" class="help-contact-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                联系客服
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Toast -->
+    <div class="help-toast" id="helpToast"></div>
+
+    <script src="help.js"></script>
+</body>
+</html>

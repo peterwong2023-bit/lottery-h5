@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>彩民新闻 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="news.css">
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="header">
+        <a href="index.html" class="header-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </a>
+        <h1 class="header-title">彩民新闻</h1>
+        <button class="header-search" id="searchBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 搜索栏(默认隐藏) -->
+    <div class="search-bar" id="searchBar">
+        <div class="search-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="搜索新闻..." id="searchInput">
+        </div>
+        <button class="search-cancel" id="searchCancel">取消</button>
+    </div>
+
+    <!-- 分类标签 -->
+    <div class="news-tabs" id="newsTabs">
+        <button class="news-tab active" data-category="all">全部</button>
+        <button class="news-tab" data-category="news">行业资讯</button>
+        <button class="news-tab" data-category="analysis">数据分析</button>
+        <button class="news-tab" data-category="tips">投注技巧</button>
+        <button class="news-tab" data-category="winners">中奖故事</button>
+        <button class="news-tab" data-category="rules">玩法规则</button>
+    </div>
+
+    <!-- 新闻内容 -->
+    <div class="news-page">
+        <!-- 快讯栏 -->
+        <div class="flash-bar">
+            <span class="flash-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                快讯
+            </span>
+            <div class="flash-content">
+                <div class="flash-scroll">
+                    <span>【福彩】双色球第2026015期今晚开奖，奖池5.2亿</span>
+                    <span>【体彩】大乐透今日截止时间调整为20:00</span>
+                    <span>【快三】江苏快三新规则即将上线</span>
+                    <span>【系统】开奖网APP 3.0版本正式发布</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 头条新闻 -->
+        <div class="headline-card" id="headlineCard">
+            <!-- 动态生成 -->
+        </div>
+
+        <!-- 热门排行 -->
+        <div class="hot-ranking">
+            <div class="ranking-header">
+                <h3>🔥 热门排行</h3>
+            </div>
+            <div class="ranking-list" id="rankingList">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- 新闻列表 -->
+        <div class="news-list" id="newsList">
+            <!-- 动态生成 -->
+        </div>
+
+        <!-- 加载更多 -->
+        <div class="load-more">
+            <button class="btn-load-more" id="loadMore">
+                <span>加载更多</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="tab-bar">
+        <a href="index.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.5V19a2 2 0 002 2h10a2 2 0 002-2v-6.5"/>
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M14 21v-4a2 2 0 00-4 0v4"/>
+                </svg>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="trend.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 16 12 12 8 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <span>走势</span>
+        </a>
+        <a href="roadmap.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+            </div>
+            <span>路子图</span>
+        </a>
+        <a href="me.html" class="tab-bar-item">
+            <div class="tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21a7 7 0 0114 0"/>
+                </svg>
+            </div>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script src="news.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>设置 - 开奖网</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body class="settings-page">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-time" id="statusTime">16:50</div>
+        <div class="status-icons">
+            <svg class="signal" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V10h-2v10zm4 0h2V7h-2v13z"/></svg>
+            <svg class="wifi" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <span class="battery">85%</span>
+        </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <header class="page-header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="header-title">设置</h1>
+        <div style="width:40px"></div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="st-content">
+
+        <!-- 账号设置 -->
+        <div class="st-section">
+            <div class="st-section-title">账号设置</div>
+            <div class="st-card">
+                <div class="st-item" onclick="openNicknameEdit()">
+                    <div class="st-item-left">
+                        <div class="st-item-icon blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">修改昵称</span>
+                    </div>
+                    <div class="st-item-right">
+                        <span class="st-item-value" id="currentNickname">未设置</span>
+                        <svg class="st-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </div>
+                </div>
+                <div class="st-item st-item-danger" onclick="confirmDeactivate()">
+                    <div class="st-item-left">
+                        <div class="st-item-icon red">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">注销账号</span>
+                    </div>
+                    <div class="st-item-right">
+                        <svg class="st-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通知设置 -->
+        <div class="st-section">
+            <div class="st-section-title">通知设置</div>
+            <div class="st-card">
+                <div class="st-item">
+                    <div class="st-item-left">
+                        <div class="st-item-icon orange">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">推送通知</span>
+                    </div>
+                    <label class="st-toggle">
+                        <input type="checkbox" id="pushToggle" checked onchange="saveSetting('push', this.checked)">
+                        <span class="st-toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="st-item">
+                    <div class="st-item-left">
+                        <div class="st-item-icon purple">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                                <path d="M15.54 8.46a5 5 0 010 7.07"/>
+                                <path d="M19.07 4.93a10 10 0 010 14.14"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">声音</span>
+                    </div>
+                    <label class="st-toggle">
+                        <input type="checkbox" id="soundToggle" checked onchange="saveSetting('sound', this.checked)">
+                        <span class="st-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 显示设置 -->
+        <div class="st-section">
+            <div class="st-section-title">显示设置</div>
+            <div class="st-card">
+                <div class="st-item st-item-column">
+                    <div class="st-item-top">
+                        <div class="st-item-left">
+                            <div class="st-item-icon teal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 7 4 4 20 4 20 7"/>
+                                    <line x1="9" y1="20" x2="15" y2="20"/>
+                                    <line x1="12" y1="4" x2="12" y2="20"/>
+                                </svg>
+                            </div>
+                            <span class="st-item-label">字体大小</span>
+                        </div>
+                    </div>
+                    <div class="st-font-selector">
+                        <div class="st-font-options" id="fontOptions">
+                            <button class="st-font-btn" data-size="small" onclick="setFontSize('small')">
+                                <span class="st-font-preview" style="font-size:12px">A</span>
+                                <span class="st-font-name">小</span>
+                            </button>
+                            <button class="st-font-btn active" data-size="standard" onclick="setFontSize('standard')">
+                                <span class="st-font-preview" style="font-size:16px">A</span>
+                                <span class="st-font-name">标准</span>
+                            </button>
+                            <button class="st-font-btn" data-size="large" onclick="setFontSize('large')">
+                                <span class="st-font-preview" style="font-size:20px">A</span>
+                                <span class="st-font-name">大</span>
+                            </button>
+                        </div>
+                        <div class="st-font-track">
+                            <div class="st-font-track-fill" id="fontTrackFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 偏好设置 -->
+        <div class="st-section">
+            <div class="st-section-title">偏好设置</div>
+            <div class="st-card">
+                <div class="st-item" onclick="openLotteryPicker()">
+                    <div class="st-item-left">
+                        <div class="st-item-icon green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">默认彩种</span>
+                    </div>
+                    <div class="st-item-right">
+                        <span class="st-item-value" id="defaultLottery">东方彩票</span>
+                        <svg class="st-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </div>
+                </div>
+                <div class="st-item">
+                    <div class="st-item-left">
+                        <div class="st-item-icon cyan">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+                            </svg>
+                        </div>
+                        <span class="st-item-label">开奖自动刷新</span>
+                    </div>
+                    <label class="st-toggle">
+                        <input type="checkbox" id="autoRefreshToggle" checked onchange="saveSetting('autoRefresh', this.checked)">
+                        <span class="st-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 版本信息 -->
+        <div class="st-version">
+            <div class="st-version-icon">🎯</div>
+            <div class="st-version-name">开奖网</div>
+            <div class="st-version-num">Version 1.0.0</div>
+        </div>
+
+        <!-- 退出登录 -->
+        <div class="st-logout-wrap">
+            <button class="st-logout-btn" onclick="confirmLogout()">退出登录</button>
+        </div>
+
+    </main>
+
+    <!-- 修改昵称弹窗 -->
+    <div class="st-modal" id="nicknameModal">
+        <div class="st-modal-mask" onclick="closeNicknameEdit()"></div>
+        <div class="st-modal-content">
+            <div class="st-modal-header">
+                <h3>修改昵称</h3>
+                <button class="st-modal-close" onclick="closeNicknameEdit()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="st-modal-body">
+                <div class="st-input-wrap">
+                    <input type="text" class="st-input" id="nicknameInput" placeholder="请输入昵称" maxlength="12">
+                    <span class="st-input-count"><span id="nickCount">0</span>/12</span>
+                </div>
+                <div class="st-input-tips">
+                    <span>· 昵称长度 2~12 个字符</span>
+                    <span>· 支持中文、英文、数字</span>
+                </div>
+            </div>
+            <div class="st-modal-footer">
+                <button class="st-modal-cancel" onclick="closeNicknameEdit()">取消</button>
+                <button class="st-modal-confirm" onclick="saveNickname()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 默认彩种选择弹窗 -->
+    <div class="st-picker" id="lotteryPicker">
+        <div class="st-picker-mask" onclick="closeLotteryPicker()"></div>
+        <div class="st-picker-content">
+            <div class="st-picker-header">
+                <button class="st-picker-cancel" onclick="closeLotteryPicker()">取消</button>
+                <span class="st-picker-title">默认彩种</span>
+                <button class="st-picker-confirm" onclick="confirmLottery()">确定</button>
+            </div>
+            <div class="st-picker-body" id="lotteryPickerBody">
+                <!-- JS动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 注销确认弹窗 -->
+    <div class="st-confirm" id="deactivateConfirm">
+        <div class="st-confirm-mask" onclick="closeDeactivate()"></div>
+        <div class="st-confirm-content">
+            <div class="st-confirm-icon">
+                <svg viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" stroke="#ef4444" stroke-width="2.5"/>
+                    <path d="M24 14v12" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="24" cy="32" r="1.5" fill="#ef4444"/>
+                </svg>
+            </div>
+            <div class="st-confirm-title">确认注销账号？</div>
+            <div class="st-confirm-desc">注销后将清除所有个人数据，包括收藏、提醒、浏览记录等，且无法恢复。</div>
+            <div class="st-confirm-actions">
+                <button class="st-confirm-no" onclick="closeDeactivate()">再想想</button>
+                <button class="st-confirm-yes" onclick="doDeactivate()">确认注销</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 退出登录确认弹窗 -->
+    <div class="st-confirm" id="logoutConfirm">
+        <div class="st-confirm-mask" onclick="closeLogout()"></div>
+        <div class="st-confirm-content">
+            <div class="st-confirm-icon">
+                <svg viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" stroke="#f59e0b" stroke-width="2.5"/>
+                    <path d="M24 14v12" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="24" cy="32" r="1.5" fill="#f59e0b"/>
+                </svg>
+            </div>
+            <div class="st-confirm-title">确认退出登录？</div>
+            <div class="st-confirm-desc">退出后需要重新验证手机号登录。</div>
+            <div class="st-confirm-actions">
+                <button class="st-confirm-no" onclick="closeLogout()">取消</button>
+                <button class="st-confirm-yes st-confirm-warn" onclick="doLogout()">退出登录</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="st-toast" id="stToast"></div>
+
+    <script src="settings.js"></script>
+</body>
+</html>

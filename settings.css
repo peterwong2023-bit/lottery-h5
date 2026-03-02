@@ -1,0 +1,841 @@
+/* ===================================
+   设置页面样式
+   =================================== */
+
+body.settings-page {
+    padding-top: calc(88px + var(--safe-top, 0px)) !important;
+    padding-bottom: calc(24px + var(--safe-bottom, 0px)) !important;
+    background: linear-gradient(180deg, #eef2f9 0%, #f5f7fb 100%);
+    min-height: 100vh;
+}
+
+/* ===================================
+   页面头部
+   =================================== */
+.page-header {
+    position: fixed;
+    top: calc(24px + var(--safe-top, 0px));
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+}
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.92);
+}
+
+.back-btn svg {
+    width: 22px;
+    height: 22px;
+    color: white;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+/* ===================================
+   主内容区
+   =================================== */
+.st-content {
+    padding: 0 16px;
+}
+
+/* ===================================
+   分组
+   =================================== */
+.st-section {
+    margin-bottom: 20px;
+}
+
+.st-section:first-child {
+    margin-top: 8px;
+}
+
+.st-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-400);
+    padding: 0 4px;
+    margin-bottom: 8px;
+}
+
+/* ===================================
+   卡片
+   =================================== */
+.st-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ===================================
+   设置项
+   =================================== */
+.st-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--gray-50);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.st-item:last-child {
+    border-bottom: none;
+}
+
+.st-item:active {
+    background: var(--gray-50);
+}
+
+.st-item-column {
+    flex-direction: column;
+    align-items: stretch;
+    cursor: default;
+}
+
+.st-item-column:active {
+    background: transparent;
+}
+
+.st-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.st-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.st-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.st-item-icon svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.st-item-icon.blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 3px 8px rgba(59, 130, 246, 0.3);
+}
+
+.st-item-icon.red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.3);
+}
+
+.st-item-icon.orange {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.3);
+}
+
+.st-item-icon.purple {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    box-shadow: 0 3px 8px rgba(139, 92, 246, 0.3);
+}
+
+.st-item-icon.teal {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    box-shadow: 0 3px 8px rgba(20, 184, 166, 0.3);
+}
+
+.st-item-icon.green {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 3px 8px rgba(34, 197, 94, 0.3);
+}
+
+.st-item-icon.cyan {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    box-shadow: 0 3px 8px rgba(6, 182, 212, 0.3);
+}
+
+.st-item-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-800);
+}
+
+.st-item-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.st-item-value {
+    font-size: 14px;
+    color: var(--gray-400);
+}
+
+.st-arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--gray-300);
+    flex-shrink: 0;
+}
+
+/* 危险操作 */
+.st-item-danger .st-item-label {
+    color: #ef4444;
+}
+
+/* ===================================
+   Toggle 开关
+   =================================== */
+.st-toggle {
+    position: relative;
+    width: 50px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.st-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.st-toggle-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gray-200);
+    border-radius: 28px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.st-toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.st-toggle input:checked + .st-toggle-slider {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.st-toggle input:checked + .st-toggle-slider::before {
+    transform: translateX(22px);
+}
+
+/* ===================================
+   字体大小选择器
+   =================================== */
+.st-font-selector {
+    padding: 0 4px;
+}
+
+.st-font-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.st-font-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.st-font-btn:active {
+    transform: scale(0.95);
+}
+
+.st-font-btn.active {
+    background: rgba(59, 130, 246, 0.06);
+    border-color: var(--primary);
+}
+
+.st-font-preview {
+    font-weight: 700;
+    color: var(--gray-400);
+    transition: all 0.25s ease;
+    line-height: 1;
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.st-font-btn.active .st-font-preview {
+    color: var(--primary);
+}
+
+.st-font-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-400);
+    transition: color 0.25s ease;
+}
+
+.st-font-btn.active .st-font-name {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* 字体进度条 */
+.st-font-track {
+    height: 4px;
+    background: var(--gray-100);
+    border-radius: 2px;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.st-font-track-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #60a5fa);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 50%;
+}
+
+/* ===================================
+   版本信息
+   =================================== */
+.st-version {
+    text-align: center;
+    padding: 32px 20px 16px;
+}
+
+.st-version-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.st-version-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-700);
+    margin-bottom: 4px;
+}
+
+.st-version-num {
+    font-size: 13px;
+    color: var(--gray-400);
+}
+
+/* ===================================
+   退出登录按钮
+   =================================== */
+.st-logout-wrap {
+    padding: 0 16px 24px;
+}
+
+.st-logout-btn {
+    width: 100%;
+    height: 50px;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.st-logout-btn:active {
+    background: #fef2f2;
+    border-color: #fecaca;
+    transform: scale(0.98);
+}
+
+/* ===================================
+   修改昵称弹窗
+   =================================== */
+.st-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: none;
+}
+
+.st-modal.show {
+    display: block;
+}
+
+.st-modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    animation: stFadeIn 0.25s ease;
+}
+
+.st-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 48px);
+    max-width: 340px;
+    background: white;
+    border-radius: 20px;
+    animation: stZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+@keyframes stFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes stZoomIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.st-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.st-modal-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.st-modal-close {
+    width: 30px;
+    height: 30px;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.st-modal-close svg {
+    width: 16px;
+    height: 16px;
+    color: var(--gray-500);
+}
+
+.st-modal-body {
+    padding: 20px;
+}
+
+.st-input-wrap {
+    position: relative;
+}
+
+.st-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 50px 0 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.st-input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.st-input::placeholder {
+    color: var(--gray-300);
+}
+
+.st-input-count {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--gray-300);
+}
+
+.st-input-tips {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.st-input-tips span {
+    font-size: 12px;
+    color: var(--gray-400);
+}
+
+.st-modal-footer {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 20px;
+}
+
+.st-modal-cancel,
+.st-modal-confirm {
+    flex: 1;
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.st-modal-cancel {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+.st-modal-cancel:active {
+    background: var(--gray-200);
+}
+
+.st-modal-confirm {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
+}
+
+.st-modal-confirm:active {
+    transform: scale(0.97);
+}
+
+/* ===================================
+   彩种选择弹窗
+   =================================== */
+.st-picker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: none;
+}
+
+.st-picker.show {
+    display: block;
+}
+
+.st-picker-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    animation: stFadeIn 0.2s ease;
+}
+
+.st-picker-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    animation: stSlideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes stSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.st-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    flex-shrink: 0;
+}
+
+.st-picker-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.st-picker-cancel,
+.st-picker-confirm {
+    padding: 6px 16px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.st-picker-cancel {
+    color: var(--gray-500);
+}
+
+.st-picker-confirm {
+    color: var(--primary);
+}
+
+.st-picker-cancel:active,
+.st-picker-confirm:active {
+    opacity: 0.6;
+}
+
+.st-picker-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 16px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+}
+
+.st-picker-option {
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.st-picker-option:active {
+    background: var(--gray-50);
+}
+
+.st-picker-option.active {
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.st-picker-option.active::after {
+    content: '✓';
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ===================================
+   确认弹窗（注销 / 退出）
+   =================================== */
+.st-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 300;
+    display: none;
+}
+
+.st-confirm.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.st-confirm-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    animation: stFadeIn 0.25s ease;
+}
+
+.st-confirm-content {
+    position: relative;
+    width: calc(100% - 56px);
+    max-width: 320px;
+    background: white;
+    border-radius: 22px;
+    padding: 32px 24px 24px;
+    text-align: center;
+    animation: stZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.st-confirm-icon {
+    margin-bottom: 16px;
+}
+
+.st-confirm-icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+.st-confirm-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+}
+
+.st-confirm-desc {
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.st-confirm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.st-confirm-no,
+.st-confirm-yes {
+    flex: 1;
+    height: 46px;
+    border: none;
+    border-radius: 13px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.st-confirm-no {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+.st-confirm-no:active {
+    background: var(--gray-200);
+}
+
+.st-confirm-yes {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}
+
+.st-confirm-yes.st-confirm-warn {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.st-confirm-yes:active {
+    transform: scale(0.97);
+}
+
+/* ===================================
+   Toast
+   =================================== */
+.st-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.st-toast.show {
+    opacity: 1;
+    visibility: visible;
+    animation: stToastIn 0.3s ease;
+}
+
+@keyframes stToastIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
